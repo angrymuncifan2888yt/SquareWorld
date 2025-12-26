@@ -1,0 +1,1 @@
+from common.interface import ILogical

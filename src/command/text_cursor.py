@@ -1,0 +1,24 @@
+import pygame
+from core import Timer, Hitbox
+from common.interface import ILogical
+
+
+class TextCursor(ILogical):
+    def __init__(self, position):
+        self.hitbox = Hitbox(position, 10, 40)
+        self.blink_timer = Timer(0.5)
+        self.is_visible = True
+
+    @property
+    def position(self):
+        return self.hitbox.position
+
+    @position.setter
+    def position(self, value):
+        self.hitbox.position = value
+
+    def update(self, delta: float):
+        self.blink_timer.update(delta)
+        if self.blink_timer.finished:
+            self.is_visible = not self.is_visible
+            self.blink_timer.reset()
