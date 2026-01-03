@@ -1,7 +1,8 @@
 import pygame
 import sys
 from core import Position
-from graphics import HpBar, Fonts, Text
+from graphics import HpBar, Text
+from assets import Fonts
 from renderer.graphics import RendererHpBar, RendererText
 from renderer.other import RendererTypingField
 from command import TypingField, CommandParser, execute_command

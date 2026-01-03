@@ -1,7 +1,7 @@
 from .entity import Entity
-from common import Event, EventType
 from core import Timer, Hitbox, Position
-from graphics import Text, Fonts
+from graphics import Text
+from assets import Fonts
 
 
 class EntityBomb(Entity):
@@ -54,10 +54,4 @@ class EntityBomb(Entity):
             self.explosion_timer.update(delta)
 
             if self.explosion_timer.finished:
-                self.emit_event(Event(EventType.REMOVE_ENTITY, {}))
-
-    def handle_event(self, event):
-        if event.type == EventType.PLAYER_STAT:
-            if event.data["hitbox"].collides_hitbox(self.hitbox):
-                if self.is_exploding:
-                    self.emit_event(Event(EventType.PLAYER_DAMAGE, {"damage": 200}))
+                self.alive = False

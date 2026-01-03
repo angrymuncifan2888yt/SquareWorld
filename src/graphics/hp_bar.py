@@ -1,6 +1,6 @@
 from core import Position, Hitbox
 from .text import Text
-from .fonts import Fonts
+from assets import Fonts
 from common import Const
 
 

@@ -1,6 +1,5 @@
 from .entity.entity import Entity
 from .entity import *
-from common import Event, EventType
 from typing import List
 from renderer.entity import *
 from renderer.other import RendererHitbox
@@ -10,6 +9,8 @@ class World:
     def __init__(self, player: EntityPlayer):
         self.entities: List[Entity] = []
         self.entities.append(player)
+        self.delta = 1
+        self.delta_multiplier = 1.0
 
     @property
     def player(self) -> EntityPlayer:
@@ -21,36 +22,17 @@ class World:
     def add_entity(self, entity):
         self.entities.append(entity)
 
-    def notify_all(self, event):
+    def update(self):
+        self.delta *= self.delta_multiplier
         for entity in self.entities:
-            entity.handle_event(event)
+            if not entity.alive:
+                self.entities.remove(entity)
+                
+            entity.update(self.delta)
 
-    def handle_entity_events(self):
-        entities_list_copy = self.entities.copy()
-
-        for entity in entities_list_copy:
-            event_list_copy: List[Event] = entity.entity_events.copy()
-
-            for event in event_list_copy:
-                self.notify_all(event)
-
-                if event.type == EventType.TEST_EVENT:
-                    print(f"DEBUG: TEst: {event.data}")
-
-                if event.type == EventType.REMOVE_ENTITY:
-                    self.entities.remove(entity)
-
-                if event:
-                    entity.entity_events.remove(event)
-
-    def update(self, delta: float):
-        self.handle_entity_events()
-        self.notify_all(
-            Event(EventType.PLAYER_STAT, {"hitbox": self.player.hitbox, "hp": self.player.hp, "god": self.player.god_mode})
-        )
-
-        for entity in self.entities:
-            entity.update(delta)
+            for other in self.entities:
+                if entity != other and entity.hitbox.collides_hitbox(other.hitbox):
+                    entity.onCollision(other)
 
     def render(self, screen, camera=None, render_hitbox=True):
         for entity in self.entities:

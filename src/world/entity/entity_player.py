@@ -1,5 +1,9 @@
 from .entity import Entity
-from common import HpSystem, Event, EventType
+from .entity_medkit import EntityMedkit
+from .entity_platform import EntityPlatform
+from .entity_triangle import EntityTriangle
+from .entity_bomb import EntityBomb
+from common import HpSystem
 from common import Const
 from assets import Sound
 
@@ -10,36 +14,38 @@ class EntityPlayer(Entity):
         self.hp = HpSystem(Const.PLAYER_MAX_HP)
         self.god_mode = False
 
-    def handle_event(self, event: Event):
+    def update(self, delta):
         if self.hp.is_dead:
             self.position.x = 0
             self.position.y = 0
             self.hp.revive()
 
-        if event.type == EventType.PLAYER_HEAL:
-            self.hp.add_hp(event.data["heal"])
-            Sound.heal()
-
-        elif event.type == EventType.PLAYER_GOD:
-            self.god_mode = event.data["do_god"]
-
-        elif event.type == EventType.PLAYER_MAX_HP_SET:
-            self.hp.set_max_hp(event.data["max_hp"])
-
-        elif event.type == EventType.PLAYER_REVIVE:
-            self.hp.revive()
-
-        elif event.type == EventType.PLAYER_POSITION_SET:
-            self.position = event.data["position"]
+    def damage(self, hp):
+        self.hp.damage(hp)
+        Sound.damage()
+    
+    def kill(self):
+        self.hp.kill()
+        Sound.damage()
+        
+    def onCollision(self, entity):
+        if isinstance(entity, EntityMedkit):
+            if not self.hp.hp >= self.hp.max_hp:
+                self.hp.add_hp(40)
+                entity.alive = False
+                Sound.heal()
 
         if not self.god_mode:
-            if event.type == EventType.PLAYER_DAMAGE:
-                self.hp.damage(event.data["damage"])
-                Sound.damage()
+            if isinstance(entity, EntityTriangle):
+                if entity.can_damage:
+                    self.damage(40)
+                    entity.can_damage = False
+                    Sound.damage()
 
-            elif event.type == EventType.PLAYER_KILL:
-                self.hp.kill()
-                Sound.damage()
+            elif isinstance(entity, EntityBomb):
+                if entity.is_exploding:
+                    self.damage(200)
+                    Sound.damage()
 
-            elif event.type == EventType.PLAYER_COLLISION:
-                self.hitbox.handle_collision(event.data["hitbox"])
+            elif isinstance(entity, EntityPlatform):
+                self.hitbox.handle_collision(entity.hitbox)

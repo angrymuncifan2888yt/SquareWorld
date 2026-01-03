@@ -4,7 +4,7 @@ from world import World
 from world.entity import *
 from core import Position, Camera, Direction
 from assets import Sound
-from graphics import HpBar, Fonts, Text
+from assets import Fonts
 from common import Const
 from command import TypingField
 from hud import HUD
@@ -40,14 +40,15 @@ class Game:
         # HUD
         self.hud = HUD(self.world)
 
-    def process_world(self, delta):
+    def process_world(self, delta: float):
+        self.world.delta = delta
         if not self.free_cam:
             self.camera.center_on(
                 self.world.player.hitbox.position,
                 self.world.player.hitbox.width,
                 self.world.player.hitbox.height
             )
-        self.world.update(delta)
+        self.world.update()
         self.world.render(self.screen, self.camera, self.debug)
 
     def mainloop(self):
@@ -67,16 +68,16 @@ class Game:
 
             if not self.hud.do_type:
                 if keys_pressed[pygame.K_a]:
-                    self.world.player.position.move(Direction.LEFT, Const.PLAYER_SPEED, delta)
+                    self.world.player.position.move(Direction.LEFT, Const.PLAYER_SPEED, self.world.delta)
 
                 if keys_pressed[pygame.K_d]:
-                    self.world.player.position.move(Direction.RIGHT, Const.PLAYER_SPEED, delta)
+                    self.world.player.position.move(Direction.RIGHT, Const.PLAYER_SPEED, self.world.delta)
 
                 if keys_pressed[pygame.K_w]:
-                    self.world.player.position.move(Direction.TOP, Const.PLAYER_SPEED, delta)
+                    self.world.player.position.move(Direction.TOP, Const.PLAYER_SPEED, self.world.delta)
 
                 if keys_pressed[pygame.K_s]:
-                    self.world.player.position.move(Direction.DOWN, Const.PLAYER_SPEED, delta)
+                    self.world.player.position.move(Direction.DOWN, Const.PLAYER_SPEED, self.world.delta)
 
                 # Camera movement
                 if keys_pressed[pygame.K_j]:  # KJ!!!!!

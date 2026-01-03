@@ -1,15 +1,5 @@
-from idlelib.configdialog import help_pages
-
-from .enum.event_type import EventType
 from dataclasses import dataclass
 from .const import Const
-
-
-@dataclass
-class Event:
-    type: EventType
-    data: dict
-    delete_after_process: bool = True
 
 
 @dataclass
@@ -21,7 +11,7 @@ class HpSystem:
     def damage(self, damage):
         self.hp -= damage
 
-        if self.hp < 0:
+        if self.hp <= 0:
             self.is_dead = True
             self.hp = 0
 
