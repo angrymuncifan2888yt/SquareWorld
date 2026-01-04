@@ -28,7 +28,6 @@ class Game:
         self.camera = Camera(Position(0, 0), 1200, 800)
         self.world = World(EntityPlayer(Position(0, 100)))
         self.world.add_entity(EntityTriangle(Position(400, 400)))
-        self.world.add_entity(EntityPlatform(Position(-100, 0)))
         self.world.add_entity(EntityMedkit(Position(100, 400)))
         self.world.add_entity(EntityBomb(Position(400, -400)))
         self.world.add_block(ObsidianBlock(Position(0, 0)))

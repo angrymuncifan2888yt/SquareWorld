@@ -14,9 +14,6 @@ class RendererWorld:
 
             elif isinstance(entity, EntityTriangle):
                 RendererEntityTriangle.render(screen, entity, camera)
-            
-            elif isinstance(entity, EntityPlatform):
-                RendererEntityPlatform.render(screen, entity, camera)
 
             elif isinstance(entity, EntityMedkit):
                 RendererEntityMedkit.render(screen, entity, camera)

@@ -1,6 +1,5 @@
 from .entity import Entity
 from .entity_medkit import EntityMedkit
-from .entity_platform import EntityPlatform
 from .entity_triangle import EntityTriangle
 from .entity_bomb import EntityBomb
 from common import HpSystem
@@ -46,9 +45,6 @@ class EntityPlayer(Entity):
                 if entity.is_exploding:
                     self.damage(200)
                     Sound.damage()
-
-            elif isinstance(entity, EntityPlatform):
-                self.hitbox.handle_collision(entity.hitbox)
 
     def onBlockCollision(self, block):
         if not self.god_mode:

@@ -55,10 +55,6 @@ def command_spawn(world: "World", parsed_command: ParsedCommand):
         ent = EntityMedkit(Position(x, y), parsed_command.data)
         world.add_entity(ent)
 
-    elif parsed_command.args[0] == "platform":
-        ent = EntityPlatform(Position(x, y), creation_params=parsed_command.data)
-        world.add_entity(ent)
-
     elif parsed_command.args[0] == "bomb":
         ent = EntityBomb(Position(x, y), parsed_command.data)
         world.add_entity(ent)
