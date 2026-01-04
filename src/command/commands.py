@@ -5,8 +5,18 @@ from world.entity import *
 
 
 def command_tp(world: "World", parsed_command: ParsedCommand):
-    pos = Position(int(parsed_command.args[0]), int(parsed_command.args[1]))
-    world.player.position = pos
+    if parsed_command.args[0] == ".":
+        x = world.player.position.x
+    
+    else:
+        x = int(parsed_command.args[0])
+
+    if parsed_command.args[1] == ".":
+        y = world.player.position.y
+
+    else:
+        y = int(parsed_command.args[1])
+    world.player.position = Position(x, y)
 
 def command_hp(world: "World", parsed_command: ParsedCommand):
     if parsed_command.args[0] == "heal":
@@ -24,8 +34,19 @@ def command_hp(world: "World", parsed_command: ParsedCommand):
             world.player.kill()
 
 def command_spawn(world: "World", parsed_command: ParsedCommand):
-    x = int(parsed_command.args[1])
-    y = int(parsed_command.args[2])
+    if parsed_command.args[1] == ".":
+        x = world.player.position.x
+    
+    else:
+        x = int(parsed_command.args[1])
+
+    if parsed_command.args[2] == ".":
+        y = world.player.position.y
+
+    else:
+        y = int(parsed_command.args[2])
+
+
     if parsed_command.args[0] == "triangle":
         ent = EntityTriangle(Position(x, y), parsed_command.data)
         world.add_entity(ent)
@@ -50,7 +71,7 @@ def command_god(world: "World", parsed_command: ParsedCommand):
 
 def command_max_health(world: "World", parsed_command: ParsedCommand):
     hp = int(parsed_command.args[0])
-    world.player.hp.max_hp = hp
+    world.player.hp.set_max_hp(hp)
 
 
 def command_time(world: "World", parsed_command: ParsedCommand):
