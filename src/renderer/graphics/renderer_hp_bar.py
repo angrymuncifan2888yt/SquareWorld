@@ -1,11 +1,10 @@
-from common.interface import IRenderer
 from graphics import HpBar
 from core import Camera
 from .renderer_text import RendererText
 import pygame
 
 
-class RendererHpBar(IRenderer):
+class RendererHpBar:
     @staticmethod
     def render(screen: pygame.Surface, hp_bar: HpBar, camera: Camera = None):
         hp_bar_pos = camera.get_screen_position(hp_bar.position) if camera else hp_bar.position

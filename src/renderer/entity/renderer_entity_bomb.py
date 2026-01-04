@@ -1,11 +1,10 @@
-from common.interface import IRenderer
 from world.entity import EntityBomb
 from ..graphics import RendererText
 from core import Camera
 import pygame
 
 
-class RendererEntityBomb(IRenderer):
+class RendererEntityBomb:
     @staticmethod
     def render(screen: pygame.Surface, bomb: EntityBomb, camera: Camera):
         pos = camera.get_screen_position(bomb.position) if camera else bomb.position

@@ -8,7 +8,8 @@ COMMANDS = {
     "spawn": command_spawn,
     "god": command_god,
     "maxhealth": command_max_health,
-    "time": command_time
+    "time": command_time,
+    "clear": command_clear,
 }
 def execute_command(game_world, parsed_command: ParsedCommand):
     COMMANDS[parsed_command.name](game_world, parsed_command)

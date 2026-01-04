@@ -10,6 +10,9 @@ class Position:
         self.x = self.x + vec2.x * (speed * delta)
         self.y = self.y - vec2.y * (speed * delta)
 
+    def to_tuple(self):
+        return (self.x, self.y)
+    
     def __getitem__(self, index: int):
         if index == 0:
             return self.x

@@ -1,2 +1,3 @@
 from .renderer_hitbox import RendererHitbox
 from .renderer_typing_field import RendererTypingField
+from .renderer_world import RendererWorld

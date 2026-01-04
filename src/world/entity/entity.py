@@ -1,8 +1,7 @@
 from core import Hitbox
-from abc import ABC
-from common.interface import ILogical
 
-class Entity(ILogical, ABC):
+
+class Entity:
     def __init__(self, position, width, height, creation_params: dict = None):
         super().__init__()
         self.alive = True
@@ -25,5 +24,8 @@ class Entity(ILogical, ABC):
     def position(self, value):
         self.hitbox.position = value
 
-    def onCollision(self, entity):
+    def onEntityCollision(self, entity):
         pass
+
+    def onBlockCollision(self, block):
+        self.hitbox.handle_collision(block.hitbox)

@@ -28,7 +28,7 @@ class EntityPlayer(Entity):
         self.hp.kill()
         Sound.damage()
         
-    def onCollision(self, entity):
+    def onEntityCollision(self, entity):
         if isinstance(entity, EntityMedkit):
             if not self.hp.hp >= self.hp.max_hp:
                 self.hp.add_hp(40)
@@ -49,3 +49,7 @@ class EntityPlayer(Entity):
 
             elif isinstance(entity, EntityPlatform):
                 self.hitbox.handle_collision(entity.hitbox)
+
+    def onBlockCollision(self, block):
+        if not self.god_mode:
+            self.hitbox.handle_collision(block.hitbox)

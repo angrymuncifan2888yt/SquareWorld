@@ -1,11 +1,10 @@
 from command import TypingField
-from common.interface import IRenderer
 from common import Const
 from core import Camera
 import pygame
 
 
-class RendererTypingField(IRenderer):
+class RendererTypingField:
     @staticmethod
     def render(screen: pygame.Surface, typing_field: TypingField, camera: Camera=None):
         # Background

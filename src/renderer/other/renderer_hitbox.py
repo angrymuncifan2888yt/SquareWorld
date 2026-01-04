@@ -1,9 +1,8 @@
-from common.interface import IRenderer
 from core import Hitbox, Camera
 import pygame
 
 
-class RendererHitbox(IRenderer):
+class RendererHitbox:
     @staticmethod
     def render(surface: pygame.Surface, hitbox: Hitbox,
                color: tuple[int, int, int]=(255, 255, 255),

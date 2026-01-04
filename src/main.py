@@ -2,12 +2,14 @@ import pygame
 import sys
 from world import World
 from world.entity import *
+from world.block import *
 from core import Position, Camera, Direction
 from assets import Sound
 from assets import Fonts
 from common import Const
 from command import TypingField
 from hud import HUD
+from renderer.other import RendererWorld
 import os
 
 
@@ -29,6 +31,7 @@ class Game:
         self.world.add_entity(EntityPlatform(Position(-100, 0)))
         self.world.add_entity(EntityMedkit(Position(100, 400)))
         self.world.add_entity(EntityBomb(Position(400, -400)))
+        self.world.add_block(ObsidianBlock(Position(0, 0)))
 
         self.free_cam = False
         self.debug = False
@@ -49,7 +52,7 @@ class Game:
                 self.world.player.hitbox.height
             )
         self.world.update()
-        self.world.render(self.screen, self.camera, self.debug)
+        RendererWorld.render(self.screen, self.world, self.camera, self.debug)
 
     def mainloop(self):
         while True:
@@ -114,6 +117,23 @@ class Game:
                     elif event.key == pygame.K_SLASH:
                         if self.hud.is_on:
                             self.hud.do_type = not self.hud.do_type
+
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    if event.button == 1:
+                        mouse_x, mouse_y = event.pos
+
+                        world_x = mouse_x + self.camera.position.x
+                        world_y = mouse_y + self.camera.position.y
+
+                        self.world.add_block(
+                            GrassBlock(
+                                Position(world_x, world_y)
+                            )
+                        )
+
+                    if event.button == 3:
+                        print("Break")
+
 
 if __name__ == "__main__":
     game = Game()

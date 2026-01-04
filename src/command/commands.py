@@ -56,3 +56,11 @@ def command_max_health(world: "World", parsed_command: ParsedCommand):
 def command_time(world: "World", parsed_command: ParsedCommand):
     time = float(parsed_command.args[0])
     world.delta_multiplier = time
+
+
+def command_clear(world: "World", parsed_command: ParsedCommand):
+    if parsed_command.args[0] == "entity":
+        world.clear_entities()
+    
+    elif parsed_command.args[0] == "block":
+        world.clear_blocks()

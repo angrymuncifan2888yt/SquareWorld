@@ -1,10 +1,9 @@
-from common.interface import IRenderer
 from world.entity import EntityPlayer
 from core import Camera
 import pygame
 
 
-class RendererEntityPlayer(IRenderer):
+class RendererEntityPlayer:
     @staticmethod
     def render(screen: pygame.Surface, player: EntityPlayer, camera: Camera = None):
         player_pos = camera.get_screen_position(player.position) if camera else player.position

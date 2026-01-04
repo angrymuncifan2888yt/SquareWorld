@@ -1,9 +1,8 @@
 import pygame
 from core import Timer, Hitbox
-from common.interface import ILogical
 
 
-class TextCursor(ILogical):
+class TextCursor:
     def __init__(self, position):
         self.hitbox = Hitbox(position, 10, 40)
         self.blink_timer = Timer(0.5)

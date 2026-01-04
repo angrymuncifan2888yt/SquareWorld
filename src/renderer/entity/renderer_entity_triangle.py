@@ -1,10 +1,9 @@
-from common.interface import IRenderer
 from world.entity import EntityTriangle
 from core import Camera
 import pygame
 
 
-class RendererEntityTriangle(IRenderer):
+class RendererEntityTriangle:
     @staticmethod
     def render(screen: pygame.Surface, triangle: EntityTriangle, camera: Camera = None):
         pos = triangle.hitbox.position

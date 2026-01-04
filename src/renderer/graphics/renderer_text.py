@@ -1,10 +1,9 @@
-from common.interface import IRenderer
 from graphics import Text
 from core import Camera
 import pygame
 
 
-class RendererText(IRenderer):
+class RendererText:
     @staticmethod
     def render(
         surface: pygame.Surface,

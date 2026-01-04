@@ -1,10 +1,9 @@
-from common.interface import IRenderer
 from world.entity import EntityMedkit
 from core import Camera
 import pygame
 
 
-class RendererEntityMedkit(IRenderer):
+class RendererEntityMedkit:
     @staticmethod
     def render(screen: pygame.Surface, medkit: EntityMedkit, camera: Camera):
         pos = camera.get_screen_position(medkit.position) if camera else medkit.position

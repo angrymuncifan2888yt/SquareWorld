@@ -2,13 +2,16 @@ from .entity.entity import Entity
 from .entity import *
 from typing import List
 from renderer.entity import *
-from renderer.other import RendererHitbox
+from .block import *
+from .block.block import Block
 
 
 class World:
     def __init__(self, player: EntityPlayer):
         self.entities: List[Entity] = []
         self.entities.append(player)
+
+        self.blocks: List[Block] = []
         self.delta = 1
         self.delta_multiplier = 1.0
 
@@ -19,8 +22,19 @@ class World:
     @player.setter
     def player(self, value): self.entities[0] = value
 
-    def add_entity(self, entity):
+    def add_entity(self, entity: Entity):
         self.entities.append(entity)
+    
+    def add_block(self, block: Block):
+        self.blocks.append(block)
+
+    def clear_entities(self):
+        player = self.entities[0]
+        self.entities.clear()
+        self.entities.append(player)
+    
+    def clear_blocks(self):
+        self.blocks.clear()
 
     def update(self):
         self.delta *= self.delta_multiplier
@@ -30,26 +44,10 @@ class World:
                 
             entity.update(self.delta)
 
+            for block in self.blocks:
+                if block.hitbox.collides_hitbox(entity.hitbox):
+                    entity.onBlockCollision(block)
+
             for other in self.entities:
                 if entity != other and entity.hitbox.collides_hitbox(other.hitbox):
-                    entity.onCollision(other)
-
-    def render(self, screen, camera=None, render_hitbox=True):
-        for entity in self.entities:
-            if isinstance(entity, EntityPlayer):
-                RendererEntityPlayer.render(screen, entity, camera)
-
-            elif isinstance(entity, EntityTriangle):
-                RendererEntityTriangle.render(screen, entity, camera)
-            
-            elif isinstance(entity, EntityPlatform):
-                RendererEntityPlatform.render(screen, entity, camera)
-
-            elif isinstance(entity, EntityMedkit):
-                RendererEntityMedkit.render(screen, entity, camera)
-
-            elif isinstance(entity, EntityBomb):
-                RendererEntityBomb.render(screen, entity, camera)
-
-            if render_hitbox:
-                RendererHitbox.render(screen, entity.hitbox, camera=camera)
+                    entity.onEntityCollision(other)
