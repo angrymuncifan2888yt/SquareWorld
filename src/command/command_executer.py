@@ -12,4 +12,7 @@ COMMANDS = {
     "clear": command_clear,
 }
 def execute_command(game_world, parsed_command: ParsedCommand):
-    COMMANDS[parsed_command.name](game_world, parsed_command)
+    try:
+        return COMMANDS[parsed_command.name](game_world, parsed_command)
+    except Exception as error:
+        return error

@@ -17,21 +17,26 @@ def command_tp(world: "World", parsed_command: ParsedCommand):
     else:
         y = int(parsed_command.args[1])
     world.player.position = Position(x, y)
+    return f"Teleported player to {x}, {y}"
 
 def command_hp(world: "World", parsed_command: ParsedCommand):
     if parsed_command.args[0] == "heal":
         if parsed_command.args[1].isdigit():
             world.player.hp.add_hp(int(parsed_command.args[1]))
+            return "Healed player"
         
         elif parsed_command.args[1] == "+":
             world.player.hp.revive()
+            return "Fully healed player"
 
     elif parsed_command.args[0] == "damage":
         if parsed_command.args[1].isdigit():
             world.player.damage(int(parsed_command.args[1]))
+            return "Damaged player"
         
         elif parsed_command.args[1] == "kill":
             world.player.kill()
+            return "Killed player"
 
 def command_spawn(world: "World", parsed_command: ParsedCommand):
     if parsed_command.args[1] == ".":
@@ -58,26 +63,34 @@ def command_spawn(world: "World", parsed_command: ParsedCommand):
     elif parsed_command.args[0] == "bomb":
         ent = EntityBomb(world, Position(x, y), parsed_command.data)
         world.add_entity(ent)
+    return "Succefly spawned in entity"
 
 
 def command_god(world: "World", parsed_command: ParsedCommand):
     do_god = True if parsed_command.args[0] == "True" else False
     world.player.god_mode = do_god
-
+    if do_god:
+        return "God mode: enabled"
+    else:
+        return "God mode: disabled"
 
 def command_max_health(world: "World", parsed_command: ParsedCommand):
     hp = int(parsed_command.args[0])
     world.player.hp.set_max_hp(hp)
+    return f"Set max health to {hp}"
 
 
 def command_time(world: "World", parsed_command: ParsedCommand):
     time = float(parsed_command.args[0])
     world.delta_multiplier = time
+    return f"Time: {time}"
 
 
 def command_clear(world: "World", parsed_command: ParsedCommand):
     if parsed_command.args[0] == "entity":
         world.clear_entities()
+        return "All entities cleared"
     
     elif parsed_command.args[0] == "block":
         world.clear_blocks()
+        return "All blocks cleared"

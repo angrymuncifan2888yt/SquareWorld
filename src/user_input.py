@@ -57,11 +57,12 @@ def user_input(self, pg_event, delta):
                 if self.hud.is_on:
                     self.hud.do_type = not self.hud.do_type
                         
-            elif pygame.K_1 <= event.key <= pygame.K_9:
-                number = event.key - pygame.K_1  # 1 → 0, 2 → 1
+            if not self.hud.do_type:
+                if pygame.K_1 <= event.key <= pygame.K_9:
+                    number = event.key - pygame.K_1  # 1 → 0, 2 → 1
 
-                if 0 <= number < len(self.blocks):
-                    self.current_block_index = number
+                    if 0 <= number < len(self.blocks):
+                        self.current_block_index = number
 
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
