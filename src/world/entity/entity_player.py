@@ -3,14 +3,14 @@ from .entity_medkit import EntityMedkit
 from .entity_triangle import EntityTriangle
 from .entity_bomb import EntityBomb
 from common import HpSystem
-from common import Const
+from common import const
 from assets import Sound
 
 
 class EntityPlayer(Entity):
     def __init__(self, position, creation_params: dict = None):
         super().__init__(position, 100, 100, creation_params)
-        self.hp = HpSystem(Const.PLAYER_MAX_HP)
+        self.hp = HpSystem(const.PLAYER_DEFAULT_MAX_HP)
         self.god_mode = False
 
     def update(self, delta):

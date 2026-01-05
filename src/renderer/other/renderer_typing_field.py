@@ -1,5 +1,5 @@
 from command import TypingField
-from common import Const
+from common import const
 from core import Camera
 import pygame
 
@@ -8,7 +8,7 @@ class RendererTypingField:
     @staticmethod
     def render(screen: pygame.Surface, typing_field: TypingField, camera: Camera=None):
         # Background
-        surface_background = pygame.Surface((Const.WINDOW_WIDTH + 100, 80))
+        surface_background = pygame.Surface((const.WINDOW_SIZE[0] + 100, 80))
         surface_background.fill((50, 50, 50))
         screen.blit(surface_background, (typing_field.position.x - 20, typing_field.position.y - 15))
 

@@ -6,7 +6,7 @@ from world.block import *
 from core import Position, Camera, Direction
 from assets import Sound
 from assets import Fonts, Sprites
-from common import Const
+from common import const
 from command import TypingField
 from hud import HUD
 from renderer.other import RendererWorld
@@ -21,7 +21,7 @@ class Game:
         Fonts.init(os.path.join("assets", "fonts", "GameFont.ttf"))
         Sound.init()
 
-        self.screen = pygame.display.set_mode((Const.WINDOW_WIDTH, 800))
+        self.screen = pygame.display.set_mode(const.WINDOW_SIZE)
         Sprites.init()
         pygame.display.set_caption("Square World")
         self.clock = pygame.time.Clock()
@@ -72,32 +72,32 @@ class Game:
 
             if not self.hud.do_type:
                 if keys_pressed[pygame.K_a]:
-                    self.world.player.position.move(Direction.LEFT, Const.PLAYER_SPEED, self.world.delta)
+                    self.world.player.position.move(Direction.LEFT, const.PLAYER_SPEED, self.world.delta)
 
                 if keys_pressed[pygame.K_d]:
-                    self.world.player.position.move(Direction.RIGHT, Const.PLAYER_SPEED, self.world.delta)
+                    self.world.player.position.move(Direction.RIGHT, const.PLAYER_SPEED, self.world.delta)
 
                 if keys_pressed[pygame.K_w]:
-                    self.world.player.position.move(Direction.TOP, Const.PLAYER_SPEED, self.world.delta)
+                    self.world.player.position.move(Direction.TOP, const.PLAYER_SPEED, self.world.delta)
 
                 if keys_pressed[pygame.K_s]:
-                    self.world.player.position.move(Direction.DOWN, Const.PLAYER_SPEED, self.world.delta)
+                    self.world.player.position.move(Direction.DOWN, const.PLAYER_SPEED, self.world.delta)
 
                 # Camera movement
                 if keys_pressed[pygame.K_j]:  # KJ!!!!!
-                    self.camera.position.move(Direction.LEFT, Const.CAMERA_SPEED, delta)
+                    self.camera.position.move(Direction.LEFT, const.CAMERA_SPEED, delta)
                     self.free_cam = True
 
                 if keys_pressed[pygame.K_l]:
-                    self.camera.position.move(Direction.RIGHT, Const.CAMERA_SPEED, delta)
+                    self.camera.position.move(Direction.RIGHT, const.CAMERA_SPEED, delta)
                     self.free_cam = True
 
                 if keys_pressed[pygame.K_i]:
-                    self.camera.position.move(Direction.TOP, Const.CAMERA_SPEED, delta)
+                    self.camera.position.move(Direction.TOP, const.CAMERA_SPEED, delta)
                     self.free_cam = True
 
                 if keys_pressed[pygame.K_k]:
-                    self.camera.position.move(Direction.DOWN, Const.CAMERA_SPEED, delta)
+                    self.camera.position.move(Direction.DOWN, const.CAMERA_SPEED, delta)
                     self.free_cam = True
 
             for event in pg_event:

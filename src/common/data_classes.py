@@ -1,12 +1,12 @@
 from dataclasses import dataclass
-from .const import Const
+from . import const
 
 
 @dataclass
 class HpSystem:
     hp: int
     is_dead: bool = False
-    max_hp: int = Const.PLAYER_MAX_HP
+    max_hp: int = const.PLAYER_DEFAULT_MAX_HP
 
     def damage(self, damage):
         self.hp -= damage

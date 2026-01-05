@@ -1,14 +1,14 @@
 from core import Position, Hitbox
 from .text import Text
 from assets import Fonts
-from common import Const
+from common import const
 
 
 class HpBar:
     def __init__(self, position: Position, value: int):
         self.hitbox = Hitbox(position, 200, 50)
         self.__value = value
-        self.max_value = Const.PLAYER_MAX_HP
+        self.max_value = const.PLAYER_DEFAULT_MAX_HP
         self.text = Text(str(self.value), Position(0, 0), Fonts.FONT_30)
         self.text.center_in_hitbox(self.hitbox)
 
