@@ -131,8 +131,21 @@ class Game:
                             )
                         )
 
-                    if event.button == 3:
-                        print("Break")
+                    elif event.button == 3:
+                        mouse_x, mouse_y = event.pos
+
+                        world_x = mouse_x + self.camera.position.x
+                        world_y = mouse_y + self.camera.position.y
+
+                        for block in self.world.blocks[:]:
+                            bx = block.position.x
+                            by = block.position.y
+
+                            if bx <= world_x <= bx + block.hitbox.width and by <= world_y <= by + block.hitbox.height:
+                                if self.world.player.god_mode:
+                                    block.alive = False
+                                block.damage(1)
+                                break
 
 
 if __name__ == "__main__":

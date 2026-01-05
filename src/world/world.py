@@ -1,8 +1,6 @@
 from .entity.entity import Entity
-from .entity import *
+from .entity import EntityPlayer
 from typing import List
-from renderer.entity import *
-from .block import *
 from .block.block import Block
 
 
@@ -45,6 +43,11 @@ class World:
             entity.update(self.delta)
 
             for block in self.blocks:
+                if not block.alive:
+                    self.blocks.remove(block)
+                    continue
+
+                block.update(self.delta)
                 if block.hitbox.collides_hitbox(entity.hitbox):
                     entity.onBlockCollision(block)
 

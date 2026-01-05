@@ -1,6 +1,6 @@
 class Timer:
     def __init__(self, time: float):
-        self.__duration = time
+        self.duration = time
         self.__time_left = time
         self.__paused = False
         self.__finished = False
@@ -31,6 +31,6 @@ class Timer:
             self.__paused = False
 
     def reset(self):
-        self.__time_left = self.__duration
+        self.__time_left = self.duration
         self.__paused = False
         self.__finished = False
