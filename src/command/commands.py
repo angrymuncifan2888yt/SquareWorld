@@ -48,15 +48,15 @@ def command_spawn(world: "World", parsed_command: ParsedCommand):
 
 
     if parsed_command.args[0] == "triangle":
-        ent = EntityTriangle(Position(x, y), parsed_command.data)
+        ent = EntityTriangle(world, Position(x, y), parsed_command.data)
         world.add_entity(ent)
 
     elif parsed_command.args[0] == "medkit":
-        ent = EntityMedkit(Position(x, y), parsed_command.data)
+        ent = EntityMedkit(world, Position(x, y), parsed_command.data)
         world.add_entity(ent)
 
     elif parsed_command.args[0] == "bomb":
-        ent = EntityBomb(Position(x, y), parsed_command.data)
+        ent = EntityBomb(world, Position(x, y), parsed_command.data)
         world.add_entity(ent)
 
 
