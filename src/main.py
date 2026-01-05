@@ -127,7 +127,7 @@ class Game:
                         world_y = mouse_y + self.camera.position.y
 
                         self.world.add_block(
-                            GrassBlock(
+                            ObsidianBlock(
                                 Position(world_x, world_y)
                             )
                         )

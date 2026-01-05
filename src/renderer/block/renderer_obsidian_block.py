@@ -1,6 +1,7 @@
 import pygame
 from core import Camera
 from assets import Sprites
+from common import const
 
 
 class RendererObsidianBlock:
@@ -8,9 +9,8 @@ class RendererObsidianBlock:
     def render(screen: pygame.Surface, block, camera: Camera=None):
         block_pos = camera.get_screen_position(block.position) if camera else block.position
 
-        surf = pygame.Surface((100, 100))
-        # surf.fill((30, 30, 30))
-        surf.fill((255, 255, 255))
+        surf = pygame.Surface(const.BLOCK_SIZE)
+        surf.fill((30, 30, 30))
         screen.blit(surf, block_pos.to_tuple())
 
         if block.hardness < block.max_hardness and Sprites.BREAKING_STAGES:

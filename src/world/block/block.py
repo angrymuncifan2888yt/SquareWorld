@@ -1,10 +1,11 @@
 from core import Hitbox
+from common import const
 
 
 
 class Block:
     def __init__(self, position, max_hardness):
-        self.hitbox = Hitbox(position, 100, 100)
+        self.hitbox = Hitbox(position, *const.BLOCK_SIZE)
         self.max_hardness = max_hardness
         self.hardness = max_hardness
         self.alive = True
