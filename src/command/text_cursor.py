@@ -1,4 +1,3 @@
-import pygame
 from core import Timer, Hitbox
 
 
@@ -7,6 +6,7 @@ class TextCursor:
         self.hitbox = Hitbox(position, 10, 40)
         self.blink_timer = Timer(0.5)
         self.is_visible = True
+        self.current_symbol = 0
 
     @property
     def position(self):

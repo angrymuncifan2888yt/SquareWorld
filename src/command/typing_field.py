@@ -22,12 +22,33 @@ class TypingField:
                 if event.key == pygame.K_RETURN:
                     command = self.text
                     self.text = ""
+
+                elif event.key == pygame.K_LEFT:
+                    if self.text_cursor.current_symbol > 0:
+                        self.text_cursor.current_symbol -= 1
+
+                elif event.key == pygame.K_RIGHT:
+                    if self.text_cursor.current_symbol < len(self.text):
+                        self.text_cursor.current_symbol += 1
+
                 elif event.key == pygame.K_BACKSPACE:
-                    pass
+                    if self.text_cursor.current_symbol > 0:
+                        self.text = (
+                            self.text[:self.text_cursor.current_symbol - 1] +
+                            self.text[self.text_cursor.current_symbol:]
+                        )
+                        self.text_cursor.current_symbol -= 1
+
                 else:
                     if event.key != pygame.K_ESCAPE and event.key != pygame.K_TAB\
                         and event.key != pygame.K_SLASH:
-                        self.text += event.unicode
+                        self.text = (
+                        self.text[:self.text_cursor.current_symbol] +
+                        event.unicode +
+                        self.text[self.text_cursor.current_symbol:]
+                        )
+                        self.text_cursor.current_symbol += 1
+
 
         if self.active and keys[pygame.K_BACKSPACE]:
             self.backspace_timer.update(delta)
@@ -38,6 +59,12 @@ class TypingField:
             self.backspace_timer.reset()
 
         # Moving text cursor
-        width = self.font.size(self.text)[0]
-        self.text_cursor.position = Position(self.position.x + width, self.position.y)
+        left_text = self.text[:self.text_cursor.current_symbol]
+        width = self.font.size(left_text)[0]
+        self.text_cursor.position = Position(
+            self.position.x + width,
+            self.position.y
+        )
+
+        # self.text_cursor.position = Position(self.position.x + width, self.position.y)
         return command
