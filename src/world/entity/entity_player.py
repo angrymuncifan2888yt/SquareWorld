@@ -42,8 +42,9 @@ class EntityPlayer(Entity):
                     Sound.damage()
 
             elif isinstance(entity, EntityBomb):
-                if entity.is_exploding:
+                if entity.is_exploding and entity.can_damage:
                     self.damage(200)
+                    entity.can_damage = False
                     Sound.damage()
 
     def onBlockCollision(self, block):

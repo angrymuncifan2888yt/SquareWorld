@@ -44,7 +44,7 @@ class Game:
         # HUD
         self.hud = HUD(self.world)
 
-        self.blocks = [GrassBlock, ObsidianBlock]
+        self.blocks = [GrassBlock, StoneBlock, ObsidianBlock]
         self.current_block_index = 0
 
     def process_world(self, delta: float):

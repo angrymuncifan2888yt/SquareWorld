@@ -9,25 +9,27 @@ class EntityBomb(Entity):
         super().__init__(position, 75, 75, creation_params)
 
         self.defuse_timer = Timer(10)
-        self.explosion_timer = Timer(0.3)
+        self.explosion_timer = Timer(0.3)  # длительность взрыва
+        self.damage_timer = Timer(0.3)
         self.is_exploding = False
+        self.can_damage = False
+
         self.text_timer = Text(str(self.defuse_timer.time_left), Position(0, 0), Fonts.FONT_30)
         self.text_timer.center_in_hitbox(self.hitbox)
 
         if isinstance(creation_params, dict):
             if creation_params.get("defuse_time"):
                 self.defuse_timer = Timer(creation_params["defuse_time"])
-
             if creation_params.get("explosion_time"):
                 self.explosion_timer = Timer(creation_params["explosion_time"])
+            if creation_params.get("damage_timer"):
+                self.damage_timer = Timer(creation_params.get("damage_timer"))
 
     def explode(self):
         self.is_exploding = True
 
-        old_hitbox = self.hitbox
-
-        center_x = old_hitbox.position.x + old_hitbox.width // 2
-        center_y = old_hitbox.position.y + old_hitbox.height // 2
+        center_x = self.hitbox.position.x + self.hitbox.width // 2
+        center_y = self.hitbox.position.y + self.hitbox.height // 2
 
         new_width = 200
         new_height = 200
@@ -35,11 +37,10 @@ class EntityBomb(Entity):
         new_x = center_x - new_width // 2
         new_y = center_y - new_height // 2
 
-        self.hitbox = Hitbox(
-            Position(new_x, new_y),
-            new_width,
-            new_height
-        )
+        self.hitbox = Hitbox(Position(new_x, new_y), new_width, new_height)
+
+        self.damage_timer.reset()
+        self.can_damage = True
 
     def update(self, delta: float):
         if not self.is_exploding:
@@ -49,9 +50,15 @@ class EntityBomb(Entity):
 
             if self.defuse_timer.finished:
                 self.explode()
-
-        elif self.is_exploding:
+        else:
             self.explosion_timer.update(delta)
+            self.damage_timer.update(delta)
+
+            if self.can_damage and self.damage_timer.finished:
+                self.can_damage = True
+            elif not self.can_damage and self.damage_timer.finished:
+                self.damage_timer.reset()
+                self.can_damage = True
 
             if self.explosion_timer.finished:
                 self.alive = False

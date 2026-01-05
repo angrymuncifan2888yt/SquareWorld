@@ -16,6 +16,9 @@ class Sprites:
         cls.OBSIDIAN_BLOCK_TEXTURE = pygame.transform.scale(
             pygame.image.load(os.path.join("assets", "img", "obsidian.jpg")).convert_alpha(),
             const.BLOCK_SIZE)
+        cls.STONE_BLOCK_TEXTURE = pygame.transform.scale(
+            pygame.image.load(os.path.join("assets", "img", "stone.jpg")).convert_alpha(),
+            const.BLOCK_SIZE)
 
         cls.BREAKING_STAGES = [
             pygame.image.load(os.path.join("assets", "img", "destroy_stage_0.png")),
