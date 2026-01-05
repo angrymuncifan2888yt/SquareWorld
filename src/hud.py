@@ -30,10 +30,8 @@ class HUD:
             Fonts.FONT_30
         )
 
-        self.hud = True
-
-    def process_hud(self, screen, clock, camera, pg_event, delta, world, debug):
-        if self.hud:
+    def update(self, pg_event, delta, world, debug):
+        if self.is_on:
             self.hp_bar.set_max_value(world.player.hp.max_hp)
             self.hp_bar.value = world.player.hp.hp
             if debug:
@@ -56,6 +54,8 @@ class HUD:
                     except Exception:
                         pass
 
+    def render(self, screen, clock, camera, debug):
+        if self.is_on:
             RendererHpBar.render(screen, self.hp_bar)
             RendererText.render(screen, self.player_pos_text)
 

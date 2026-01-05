@@ -64,7 +64,8 @@ class Game:
             self.process_world(delta)
 
             if self.hud.is_on:
-                self.hud.process_hud(self.screen, self.clock, self.camera, pg_event, delta, self.world, self.debug)
+                self.hud.update(pg_event, delta, self.world, self.debug)
+                self.hud.render(self.screen, self.clock, self.camera, self.debug)
 
             keys_pressed = pygame.key.get_pressed()
 
