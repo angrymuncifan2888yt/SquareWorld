@@ -1,5 +1,5 @@
 from ..entity import *
-from ..block import *
+from ..block import RendererBlock
 from world.entity import *
 from world.block import *
 from .renderer_hitbox import RendererHitbox
@@ -25,11 +25,7 @@ class RendererWorld:
                 RendererHitbox.render(screen, entity.hitbox, camera=camera)
 
         for block in world.blocks:
-            if isinstance(block, GrassBlock):
-                RendererGrassBlock.render(screen, block, camera)
+            RendererBlock.render(screen, block, camera)
             
-            elif isinstance(block, ObsidianBlock):
-                RendererObsidianBlock.render(screen, block, camera)
-                
             if render_hitbox:
                 RendererHitbox.render(screen, block.hitbox, camera=camera)

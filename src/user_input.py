@@ -2,6 +2,7 @@ import pygame
 from world.block import *
 from core import Position, Direction
 from common import const
+import sys
 
 
 def user_input(self, pg_event, delta):
@@ -55,6 +56,13 @@ def user_input(self, pg_event, delta):
             elif event.key == pygame.K_SLASH:
                 if self.hud.is_on:
                     self.hud.do_type = not self.hud.do_type
+                        
+            elif pygame.K_1 <= event.key <= pygame.K_9:
+                number = event.key - pygame.K_1  # 1 → 0, 2 → 1
+
+                if 0 <= number < len(self.blocks):
+                    self.current_block_index = number
+
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:
@@ -64,7 +72,7 @@ def user_input(self, pg_event, delta):
                 world_y = mouse_y + self.camera.position.y
 
                 self.world.add_block(
-                    ObsidianBlock(
+                    self.blocks[self.current_block_index](
                         Position(world_x, world_y)
                     )
                 )

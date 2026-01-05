@@ -1,2 +1,1 @@
-from .renderer_grass_block import RendererGrassBlock
-from .renderer_obsidian_block import RendererObsidianBlock
+from .renderer_block import RendererBlock

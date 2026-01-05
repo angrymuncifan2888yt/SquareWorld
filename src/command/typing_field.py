@@ -65,6 +65,5 @@ class TypingField:
             self.position.x + width,
             self.position.y
         )
-
-        # self.text_cursor.position = Position(self.position.x + width, self.position.y)
+        
         return command

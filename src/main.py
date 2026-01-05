@@ -44,6 +44,9 @@ class Game:
         # HUD
         self.hud = HUD(self.world)
 
+        self.blocks = [GrassBlock, ObsidianBlock]
+        self.current_block_index = 0
+
     def process_world(self, delta: float):
         self.world.delta = delta
         if not self.free_cam:
@@ -66,7 +69,7 @@ class Game:
             self.process_world(delta)
 
             if self.hud.is_on:
-                self.hud.update(pg_event, delta, self.world, self.debug)
+                self.hud.update(pg_event, delta, self.world, self.debug, self.blocks[self.current_block_index])
                 self.hud.render(self.screen, self.clock, self.camera, self.debug)
 
             user_input(self, pg_event, delta)
