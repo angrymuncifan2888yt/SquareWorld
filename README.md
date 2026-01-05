@@ -3,6 +3,7 @@ Simple 2d sandbox game
 
 # Made
 - World and entity system, similar to Minecraft
+- Block placement/breaking system
 - Command system/Command parser
 - Time system
 - Text input system
@@ -19,3 +20,5 @@ Press / to enter commands
 - spawn entity value value {} - spawn an entity with chosen creation params
 - god true/false - Enables/Disables god mode
 - time value - 1 base time, 2 2x faster, 0.5 2x slower and e.t.c
+- clear entity - removes all entities (except player)
+- clear block - removes all blocks 
