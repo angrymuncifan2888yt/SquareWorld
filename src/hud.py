@@ -28,17 +28,13 @@ class HUD:
             Fonts.FONT_30
         )
 
-        self.chosen_block_class = None
-        self.preview_block = None
+        self.chosen_block = None
 
     def update(self, pg_event, delta, world, debug, chosen_block):
         if not self.is_on:
             return
 
-        if self.chosen_block_class != chosen_block:
-            self.chosen_block_class = chosen_block
-            self.preview_block = chosen_block(Position(1090, 10))
-
+        self.chosen_block = chosen_block
         self.hp_bar.set_max_value(world.player.hp.max_hp)
         self.hp_bar.value = world.player.hp.hp
 
@@ -65,9 +61,7 @@ class HUD:
 
         RendererHpBar.render(screen, self.hp_bar)
         RendererText.render(screen, self.player_pos_text)
-
-        if self.preview_block:
-            RendererBlock.render(screen, self.preview_block)
+        screen.blit(self.chosen_block.texture(), (1090, 10))
 
         if self.do_type:
             RendererTypingField.render(screen, self.typing_field, None)

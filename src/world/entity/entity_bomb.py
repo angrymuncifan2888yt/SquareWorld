@@ -1,12 +1,13 @@
 from .entity import Entity
 from core import Timer, Hitbox, Position
 from graphics import Text
+from .entity_player import EntityPlayer
 from assets import Fonts
 
 
 class EntityBomb(Entity):
-    def __init__(self, position, creation_params: dict = None):
-        super().__init__(position, 75, 75, creation_params)
+    def __init__(self, world, position, creation_params: dict = None):
+        super().__init__(world, position, 75, 75, creation_params)
 
         self.defuse_timer = Timer(10)
         self.explosion_timer = Timer(0.3)  # длительность взрыва
@@ -45,10 +46,16 @@ class EntityBomb(Entity):
     def onBlockCollision(self, block):
         if not self.is_exploding:
             super().onBlockCollision(block)
-            
+
         elif self.can_damage:
             block.damage(2)
             self.can_damage = False
+
+    def onEntityCollision(self, entity):
+        if isinstance(entity, EntityPlayer):
+            if self.can_damage:
+                entity.damage(200)
+                self.can_damage = False
 
     def update(self, delta: float):
         if not self.is_exploding:
@@ -69,4 +76,4 @@ class EntityBomb(Entity):
                 self.can_damage = True
 
             if self.explosion_timer.finished:
-                self.alive = False
+                self.world.remove_entity(self)

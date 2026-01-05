@@ -2,9 +2,9 @@ from core import Hitbox
 
 
 class Entity:
-    def __init__(self, position, width, height, creation_params: dict = None):
+    def __init__(self, world, position, width, height, creation_params: dict = None):
         super().__init__()
-        self.alive = True
+        self.world = world
         self.hitbox = Hitbox(position, width, height)
 
         if isinstance(creation_params, dict):

@@ -4,15 +4,19 @@ from common import const
 
 
 class Block:
-    def __init__(self, position, max_hardness):
+    def __init__(self, world, position, max_hardness):
         self.hitbox = Hitbox(position, *const.BLOCK_SIZE)
         self.max_hardness = max_hardness
         self.hardness = max_hardness
-        self.alive = True
+        self.world = world
+
+    @classmethod
+    def texture(cls):
+        return
 
     def update(self, delta: float):
         if self.hardness <= 0:
-            self.alive = False
+            self.world.remove_block(self)
             
     def damage(self, amount=1):
         self.hardness -= amount

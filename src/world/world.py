@@ -26,6 +26,12 @@ class World:
     def add_block(self, block: Block):
         self.blocks.append(block)
 
+    def remove_entity(self, entity):
+        self.entities.remove(entity)
+    
+    def remove_block(self, block):
+        self.blocks.remove(block)
+
     def clear_entities(self):
         player = self.entities[0]
         self.entities.clear()
@@ -37,16 +43,9 @@ class World:
     def update(self):
         self.delta *= self.delta_multiplier
         for entity in self.entities:
-            if not entity.alive:
-                self.entities.remove(entity)
-                
             entity.update(self.delta)
 
             for block in self.blocks:
-                if not block.alive:
-                    self.blocks.remove(block)
-                    continue
-
                 block.update(self.delta)
                 if block.hitbox.collides_hitbox(entity.hitbox):
                     entity.onBlockCollision(block)

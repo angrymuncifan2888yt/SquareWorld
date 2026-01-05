@@ -73,6 +73,7 @@ def user_input(self, pg_event, delta):
 
                 self.world.add_block(
                     self.blocks[self.current_block_index](
+                        self.world,
                         Position(world_x, world_y)
                     )
                 )

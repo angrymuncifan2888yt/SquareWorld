@@ -1,17 +1,12 @@
 import pygame
 from core import Camera
-from .renderer_grass_block import RendererGrassBlock
-from .renderer_obsidian_block import RendererObsidianBlock
-from .renderer_stone_block import RendererStoneBlock
 from world.block import *
+from .block_breaking_stage import RendererBlockBreakingStage
 
 
 class RendererBlock:
-    render_list = {
-        GrassBlock: RendererGrassBlock,
-        ObsidianBlock: RendererObsidianBlock,
-        StoneBlock: RendererStoneBlock
-    }
     @staticmethod
     def render(screen: pygame.Surface, block, camera: Camera=None):
-        RendererBlock.render_list[type(block)].render(screen, block, camera)
+        block_pos = camera.get_screen_position(block.position) if camera else block.position
+        screen.blit(block.texture(), block_pos.to_tuple())
+        RendererBlockBreakingStage.render(screen, block, block_pos)

@@ -28,11 +28,12 @@ class Game:
         self.clock = pygame.time.Clock()
 
         self.camera = Camera(Position(0, 0), 1200, 800)
-        self.world = World(EntityPlayer(Position(0, 100)))
-        self.world.add_entity(EntityTriangle(Position(400, 400)))
-        self.world.add_entity(EntityMedkit(Position(100, 400)))
-        self.world.add_entity(EntityBomb(Position(400, -400)))
-        self.world.add_block(ObsidianBlock(Position(0, 0)))
+        self.world = World(None)
+        self.world.player = EntityPlayer(self.world, Position(0, 100))
+        self.world.add_entity(EntityTriangle(self.world, Position(400, 400)))
+        self.world.add_entity(EntityMedkit(self.world, Position(100, 400)))
+        self.world.add_entity(EntityBomb(self.world, Position(400, -400)))
+        self.world.add_block(ObsidianBlock(self.world, Position(0, 0)))
 
         self.free_cam = False
         self.debug = False

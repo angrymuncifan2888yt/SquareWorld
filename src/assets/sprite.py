@@ -7,6 +7,7 @@ class Sprites:
     BREAKING_STAGES = []
     GRASS_BLOCK_TEXTURE = None
     OBSIDIAN_BLOCK_TEXTURE = None
+    STONE_BLOCK_TEXTURE = None
 
     @classmethod
     def init(cls):
