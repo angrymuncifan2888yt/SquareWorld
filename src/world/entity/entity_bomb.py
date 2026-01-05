@@ -42,6 +42,14 @@ class EntityBomb(Entity):
         self.damage_timer.reset()
         self.can_damage = True
 
+    def onBlockCollision(self, block):
+        if not self.is_exploding:
+            super().onBlockCollision(block)
+            
+        elif self.can_damage:
+            block.damage(2)
+            self.can_damage = False
+
     def update(self, delta: float):
         if not self.is_exploding:
             self.defuse_timer.update(delta)
