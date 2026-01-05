@@ -5,7 +5,7 @@ from world.entity import *
 from world.block import *
 from core import Position, Camera, Direction
 from assets import Sound
-from assets import Fonts
+from assets import Fonts, Sprites
 from common import Const
 from command import TypingField
 from hud import HUD
@@ -22,6 +22,7 @@ class Game:
         Sound.init()
 
         self.screen = pygame.display.set_mode((Const.WINDOW_WIDTH, 800))
+        Sprites.init()
         pygame.display.set_caption("Square World")
         self.clock = pygame.time.Clock()
 
