@@ -5,9 +5,18 @@ from common import const
 
 class Sprites:
     BREAKING_STAGES = []
+    GRASS_BLOCK_TEXTURE = None
+    OBSIDIAN_BLOCK_TEXTURE = None
 
     @classmethod
     def init(cls):
+        cls.GRASS_BLOCK_TEXTURE = pygame.transform.scale(
+            pygame.image.load(os.path.join("assets", "img", "grass.jpg")).convert_alpha(),
+            const.BLOCK_SIZE)
+        cls.OBSIDIAN_BLOCK_TEXTURE = pygame.transform.scale(
+            pygame.image.load(os.path.join("assets", "img", "obsidian.jpg")).convert_alpha(),
+            const.BLOCK_SIZE)
+
         cls.BREAKING_STAGES = [
             pygame.image.load(os.path.join("assets", "img", "destroy_stage_0.png")),
             pygame.image.load(os.path.join("assets", "img", "destroy_stage_1.png")),
