@@ -2,7 +2,6 @@ import pygame
 from world.block import *
 from core import Position, Direction
 from common import const
-import sys
 
 
 def user_input(self, pg_event, delta):
@@ -39,10 +38,6 @@ def user_input(self, pg_event, delta):
             self.free_cam = True
 
     for event in pg_event:
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit(0)
-
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_h:
                 self.free_cam = False
