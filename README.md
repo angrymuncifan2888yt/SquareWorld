@@ -8,6 +8,18 @@ Simple 2d sandbox game
 - Time system
 - Text input system
 
+# Controls
+- WASD - move
+- IJKL - move camera
+- H - lock camera on player
+- TAB - open debug menu and show hitboxes
+- / - open console
+- Enter - switch main menu/game menu
+- Enter (while typing command) - run command
+- 1/2/3 - chose building blocks
+- Left mouse click - place block
+- Right mouse click - damage block (destroy if in god mode)
+
 # Commands
 Press / to enter commands
 
@@ -22,3 +34,13 @@ Press / to enter commands
 - time value - 1 base time, 2 2x faster, 0.5 2x slower and e.t.c
 - clear entity - removes all entities (except player)
 - clear block - removes all blocks 
+
+# Look at this
+- [World](src/world/world.py)
+- [Entity](src/world/entity/entity.py)
+- [Block](src/world/block/block.py)
+- [Timer](src/core/timer.py)
+- [Hitbox](src/core/hitbox.py)
+- [Typing field](src/command/typing_field.py)
+- [Timer](src/core/timer.py)
+- [HpBar](src/graphics/hp_bar.py)
