@@ -2,6 +2,7 @@ import pygame
 from world.block import *
 from core import Position, Direction
 from common import const
+from ..scene_list import SceneList
 
 
 def user_input(self, pg_event, delta):
@@ -59,6 +60,8 @@ def user_input(self, pg_event, delta):
                     if 0 <= number < len(self.blocks):
                         self.current_block_index = number
 
+                elif event.key == pygame.K_RETURN:
+                    self.scene_manager.set_scene(SceneList.MAIN_MENU)
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:

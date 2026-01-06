@@ -24,7 +24,7 @@ class Game:
         self.scene_manager = SceneManager()
         self.scene_manager.add_scene(SceneGame(self.scene_manager))
         self.scene_manager.add_scene(SceneMainMenu(self.scene_manager))
-        self.scene_manager.set_scene(SceneList.GAME)
+        self.scene_manager.set_scene(SceneList.MAIN_MENU)
 
     def mainloop(self):
         while True:
