@@ -1,15 +1,9 @@
 import pygame
-from world import World
-from world.entity import *
-from world.block import *
-from core import Position, Camera
 from assets import Sound
 from assets import Fonts, Sprites
 from common import const
-from command import TypingField
-from renderer.other import RendererWorld
-from scene.game import SceneGame
-from scene import SceneManager
+from scene import SceneGame, SceneMainMenu
+from scene import SceneManager, SceneList
 import os
 import sys
 
@@ -29,7 +23,8 @@ class Game:
 
         self.scene_manager = SceneManager()
         self.scene_manager.add_scene(SceneGame(self.scene_manager))
-        self.scene_manager.set_scene("game")
+        self.scene_manager.add_scene(SceneMainMenu(self.scene_manager))
+        self.scene_manager.set_scene(SceneList.GAME)
 
     def mainloop(self):
         while True:

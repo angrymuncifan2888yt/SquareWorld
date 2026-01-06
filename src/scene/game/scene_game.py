@@ -1,4 +1,5 @@
 from ..scene import Scene
+from ..scene_list import SceneList
 from core import Camera, Position
 from world import World
 from world.entity import *
@@ -12,7 +13,7 @@ from renderer.other import RendererWorld
 
 class SceneGame(Scene):
     def __init__(self, scene_manager):
-        super().__init__(scene_manager, "game")
+        super().__init__(scene_manager, SceneList.GAME)
         self.camera = Camera(Position(0, 0), 1200, 800)
 
         # World
@@ -42,7 +43,7 @@ class SceneGame(Scene):
 
     def logic(self, *args, **kvargs):
         self.clock = kvargs["clock"]
-        
+
         # World
         self.world.delta = kvargs["delta"]
         if not self.free_cam:
@@ -56,7 +57,7 @@ class SceneGame(Scene):
 
         # HUD
         if self.hud.is_on:
-            self.hud.update(["pg_event"], kvargs["delta"], self.world, self.debug, self.blocks[self.current_block_index])
+            self.hud.update(kvargs["pg_event"], kvargs["delta"], self.world, self.debug, self.blocks[self.current_block_index])
 
     def draw(self, screen, **kvargs):
         RendererWorld.render(screen, self.world, self.camera, self.debug)
