@@ -24,7 +24,7 @@ class SceneGame(Scene):
         self.world.add_entity(EntityMedkit(self.world, Position(100, 400)))
         self.world.add_entity(EntityBomb(self.world, Position(400, -400)))
         self.world.add_block(ObsidianBlock(self.world, Position(0, 0)))
-        self.world.add_entity(NextbotAngryMunci(self.world, Position(1000, 1000)))
+        # self.world.add_entity(NextbotAngryMunci(self.world, Position(1000, 1000)))
 
         self.free_cam = False
         self.debug = False

@@ -2,6 +2,7 @@ from common import ParsedCommand
 from core import Position
 # from world import World
 from world.entity import *
+from world.entity.nextbot import *
 
 
 def command_tp(world: "World", parsed_command: ParsedCommand):
@@ -63,6 +64,15 @@ def command_spawn(world: "World", parsed_command: ParsedCommand):
     elif parsed_command.args[0] == "bomb":
         ent = EntityBomb(world, Position(x, y), parsed_command.data)
         world.add_entity(ent)
+    
+    elif parsed_command.args[0] == "angry_munci":
+        ent = NextbotAngryMunci(world, Position(x, y), parsed_command.data)
+        world.add_entity(ent)
+    
+    elif parsed_command.args[0] == "asya":
+        ent = NextbotAsya(world, Position(x, y), parsed_command.data)
+        world.add_entity(ent)
+
     return "Succefly spawned in entity"
 
 
