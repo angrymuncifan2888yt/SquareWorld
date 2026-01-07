@@ -20,21 +20,24 @@ class AdvancedSound:
         self.sound = sound
         self.channel: pygame.mixer.Channel | None = None
 
-    def play_once(self, volume: float=1):
+    def play_once(self, volume: float = 1):
         if volume <= 0:
             return
         self.sound.set_volume(volume)
         self.sound.play()
 
-    def play_looped(self, volume: float=1):
+    def play_looped(self, volume: float = 1):
         if volume <= 0:
             self.stop()
             return
 
+        # Если канал пустой или звук закончил играть — запускаем заново
         if self.channel is None or not self.channel.get_busy():
-            self.channel = self.sound.play(loops=-1)
-
-        if self.channel:
+            self.channel = self.sound.play()
+            if self.channel:
+                self.channel.set_volume(volume)
+        # Если звук играет — просто меняем громкость
+        elif self.channel:
             self.channel.set_volume(volume)
 
     def stop(self):
@@ -49,6 +52,8 @@ class Sound:
     EXPLOSION: AdvancedSound = None
     BREAKING: AdvancedSound = None
     ANGRY_MUNCI_AMBIENCE: AdvancedSound = None
+    ASYA_AMBIENCE: AdvancedSound = None
+    SUPER_MUNCI_AMBIENCE: AdvancedSound = None
 
     @classmethod
     def init(cls):
@@ -66,4 +71,10 @@ class Sound:
         )
         cls.ANGRY_MUNCI_AMBIENCE = AdvancedSound(
             pygame.mixer.Sound("assets/sound/angry_munci_ambience.mp3")
+        )
+        cls.ASYA_AMBIENCE = AdvancedSound(
+            pygame.mixer.Sound("assets/sound/asya_ambience.mp3")
+        )
+        cls.SUPER_MUNCI_AMBIENCE = AdvancedSound(
+            pygame.mixer.Sound("assets/sound/super_munci_ambience.mp3")
         )

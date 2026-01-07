@@ -82,7 +82,7 @@ class EntityBomb(Entity):
                 self.can_damage = True
 
             if self.explosion_timer.finished:
-                self.world.remove_entity(self)
+                self.destroy()
 
     def onBombExplosionCollision(self, bomb):
         pass  # Immune to bomb

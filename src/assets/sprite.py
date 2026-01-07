@@ -10,6 +10,7 @@ class Sprites:
     STONE_BLOCK_TEXTURE = None
     ASYA_TEXTURE = None
     ANGRY_MUNCI_TEXTURE = None
+    SUPER_MUNCI_TEXTURE = None
 
     @classmethod
     def init(cls):
