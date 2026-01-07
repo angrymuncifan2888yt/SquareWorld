@@ -1,8 +1,13 @@
 import pygame
 from ..entity import Entity
 from ..entity_player import EntityPlayer
+import pygame
 
 class EntityNextbot(Entity):
+    @classmethod
+    def ambience(self) -> pygame.mixer.Sound:
+        pass
+    
     def __init__(self, world, position, width, height, speed=1000, turn_speed=2, creation_params=None):
         super().__init__(world, position, width, height, creation_params)
         self.speed = speed

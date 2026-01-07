@@ -20,16 +20,16 @@ class EntityPlayer(Entity):
     def damage(self, hp):
         if not self.god_mode:
             self.hp.damage(hp)
-            Sound.damage()
+            Sound.DAMAGE.play_once()
     
     def add_hp(self, hp):
         self.hp.add_hp(hp)
-        Sound.heal()
+        Sound.HEAL.play_once()
         
     def kill(self):
         if not self.god_mode:
             self.hp.kill()
-            Sound.damage()
+            Sound.DAMAGE.play_once()
             
     def onBlockCollision(self, block):
         if not self.god_mode:
