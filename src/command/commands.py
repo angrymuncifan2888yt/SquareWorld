@@ -108,3 +108,32 @@ def command_clear(world: "World", parsed_command: ParsedCommand):
     elif parsed_command.args[0] == "block":
         world.clear_blocks()
         return "All blocks cleared"
+
+
+def command_spawnpoint(world: "World", parsed_command: ParsedCommand):
+    if parsed_command.args[0] == ".":
+        x = world.player.position.x
+    
+    else:
+        x = int(parsed_command.args[0])
+
+    if parsed_command.args[1] == ".":
+        y = world.player.position.y
+
+    else:
+        y = int(parsed_command.args[1])
+
+    world.player.spawn_point = Position(x, y)
+    return f"Set player spawnpoint to {x} {y}"
+
+
+def command_speed(world: "World", parsed_command: ParsedCommand):
+    value = parsed_command.args[0]
+    if value == "default":
+        value = 700
+
+    else:
+        value = int(value)
+
+    world.player.speed = value
+    return f"Set player speed to {value}"

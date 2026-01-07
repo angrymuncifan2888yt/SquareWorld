@@ -11,16 +11,16 @@ def user_input(self, pg_event, delta):
 
     if not self.hud.do_type:
         if keys_pressed[pygame.K_a]:
-            self.world.player.position.move(Direction.LEFT, const.PLAYER_SPEED, self.world.delta)
+            self.world.player.position.move(Direction.LEFT, self.world.player.speed, self.world.delta)
 
         if keys_pressed[pygame.K_d]:
-            self.world.player.position.move(Direction.RIGHT, const.PLAYER_SPEED, self.world.delta)
+            self.world.player.position.move(Direction.RIGHT, self.world.player.speed, self.world.delta)
 
         if keys_pressed[pygame.K_w]:
-            self.world.player.position.move(Direction.TOP, const.PLAYER_SPEED, self.world.delta)
+            self.world.player.position.move(Direction.TOP, self.world.player.speed, self.world.delta)
 
         if keys_pressed[pygame.K_s]:
-            self.world.player.position.move(Direction.DOWN, const.PLAYER_SPEED, self.world.delta)
+            self.world.player.position.move(Direction.DOWN, self.world.player.speed, self.world.delta)
 
         # Camera movement
         if keys_pressed[pygame.K_j]:  # KJ!!!!!

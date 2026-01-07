@@ -5,15 +5,16 @@ from assets import Sound
 
 
 class EntityPlayer(Entity):
-    def __init__(self, world, position, creation_params: dict = None):
-        super().__init__(world, position, 100, 100, creation_params)
+    def __init__(self, world, spawn_point, creation_params: dict = None):
+        super().__init__(world, spawn_point.copy(), 100, 100, creation_params)
         self.hp = HpSystem(const.PLAYER_DEFAULT_MAX_HP)
         self.god_mode = False
+        self.spawn_point = spawn_point.copy()
+        self.speed = 700
 
     def update(self, delta):
         if self.hp.is_dead:
-            self.position.x = 0
-            self.position.y = 0
+            self.position = self.spawn_point.copy()
             self.hp.revive()
 
     def damage(self, hp):

@@ -10,6 +10,8 @@ COMMANDS = {
     "maxhealth": command_max_health,
     "time": command_time,
     "clear": command_clear,
+    "spawnpoint": command_spawnpoint,
+    "speed": command_speed
 }
 def execute_command(game_world, parsed_command: ParsedCommand):
     try:

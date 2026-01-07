@@ -13,6 +13,9 @@ class Position:
     def to_tuple(self):
         return (self.x, self.y)
     
+    def copy(self):
+        return Position(self.x, self.y)
+    
     def __getitem__(self, index: int):
         if index == 0:
             return self.x
