@@ -21,7 +21,8 @@ class EntityNextbot(Entity):
 
         direction = direction.normalize()
 
-        self.velocity = self.velocity.lerp(direction, self.turn_speed * delta)
+        t = max(0, min(self.turn_speed * delta, 1))
+        self.velocity = self.velocity.lerp(direction, t)
 
         self.position.x += self.velocity.x * self.speed * delta
         self.position.y += self.velocity.y * self.speed * delta
