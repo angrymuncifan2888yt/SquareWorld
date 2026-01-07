@@ -53,6 +53,9 @@ class EntityBomb(Entity):
             self.can_damage = False
 
     def onEntityCollision(self, entity):
+        if self.is_exploding:
+            entity.onBombExplosionCollision(self)
+
         if isinstance(entity, EntityPlayer):
             if self.can_damage:
                 entity.damage(200)
@@ -78,3 +81,6 @@ class EntityBomb(Entity):
 
             if self.explosion_timer.finished:
                 self.world.remove_entity(self)
+
+    def onBombExplosionCollision(self, bomb):
+        pass  # Immune to bomb

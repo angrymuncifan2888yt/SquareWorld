@@ -6,7 +6,7 @@ from assets import Sound
 
 class EntityPlayer(Entity):
     def __init__(self, world, spawn_point, creation_params: dict = None):
-        super().__init__(world, spawn_point.copy(), 100, 100, creation_params)
+        super().__init__(world, spawn_point.copy(), 100, 100,creation_params)
         self.hp = HpSystem(const.PLAYER_DEFAULT_MAX_HP)
         self.god_mode = False
         self.spawn_point = spawn_point.copy()
@@ -34,3 +34,6 @@ class EntityPlayer(Entity):
     def onBlockCollision(self, block):
         if not self.god_mode:
             self.hitbox.handle_collision(block.hitbox)
+
+    def onBombExplosionCollision(self, bomb):
+        pass  # Immune to bomb

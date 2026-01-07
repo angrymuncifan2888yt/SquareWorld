@@ -27,5 +27,8 @@ class Entity:
     def onEntityCollision(self, entity):
         pass
 
+    def onBombExplosionCollision(self, bomb):
+        self.world.remove_entity(self)
+
     def onBlockCollision(self, block):
         self.hitbox.handle_collision(block.hitbox)
