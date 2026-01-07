@@ -2,7 +2,9 @@ from .renderer_entity_player import RendererEntityPlayer
 from .renderer_entity_triangle import RendererEntityTriangle
 from .renderer_entity_medkit import RendererEntityMedkit
 from .renderer_entity_bomb import RendererEntityBomb
+from .nextbot import *
 from world.entity import *
+from world.entity.nextbot import *
 
 
 class RendererEntity:
@@ -10,7 +12,9 @@ class RendererEntity:
         EntityPlayer: RendererEntityPlayer,
         EntityBomb: RendererEntityBomb,
         EntityTriangle: RendererEntityTriangle,
-        EntityMedkit: RendererEntityMedkit
+        EntityMedkit: RendererEntityMedkit,
+        NextbotAsya: RendererNextbotAsya,
+        NextbotAngryMunci: RendererNextbotAngryMunci
     }
     @staticmethod
     def render(screen, entity, camera=None):

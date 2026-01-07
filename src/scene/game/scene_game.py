@@ -3,6 +3,7 @@ from ..scene_list import SceneList
 from core import Camera, Position
 from world import World
 from world.entity import *
+from world.entity.nextbot import *
 from world.block import *
 from command import TypingField
 from assets import Fonts
@@ -23,6 +24,7 @@ class SceneGame(Scene):
         self.world.add_entity(EntityMedkit(self.world, Position(100, 400)))
         self.world.add_entity(EntityBomb(self.world, Position(400, -400)))
         self.world.add_block(ObsidianBlock(self.world, Position(0, 0)))
+        self.world.add_entity(NextbotAngryMunci(self.world, Position(1000, 1000)))
 
         self.free_cam = False
         self.debug = False

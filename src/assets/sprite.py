@@ -8,6 +8,8 @@ class Sprites:
     GRASS_BLOCK_TEXTURE = None
     OBSIDIAN_BLOCK_TEXTURE = None
     STONE_BLOCK_TEXTURE = None
+    ASYA_TEXTURE = None
+    ANGRY_MUNCI_TEXTURE = None
 
     @classmethod
     def init(cls):
@@ -20,6 +22,12 @@ class Sprites:
         cls.STONE_BLOCK_TEXTURE = pygame.transform.scale(
             pygame.image.load(os.path.join("assets", "img", "stone.jpg")).convert_alpha(),
             const.BLOCK_SIZE)
+        cls.ASYA_TEXTURE = pygame.transform.scale(
+            pygame.image.load(os.path.join("assets", "img", "asya.jpg")).convert_alpha(),
+            (100, 120))
+        cls.ANGRY_MUNCI_TEXTURE = pygame.transform.scale(
+            pygame.image.load(os.path.join("assets", "img", "angry_munci.png")).convert_alpha(),
+            (100, 120))
 
         cls.BREAKING_STAGES = [
             pygame.image.load(os.path.join("assets", "img", "destroy_stage_0.png")),

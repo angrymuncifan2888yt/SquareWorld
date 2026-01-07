@@ -1,0 +1,2 @@
+from .renderer_nextbot_asya import RendererNextbotAsya
+from .renderer_nextbot_angry_munci import RendererNextbotAngryMunci
