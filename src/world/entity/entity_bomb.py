@@ -42,7 +42,7 @@ class EntityBomb(Entity):
 
         self.damage_timer.reset()
         self.can_damage = True
-        Sound.explode()
+        Sound.explode(self.position, self.world.player.position)
 
     def onBlockCollision(self, block):
         if not self.is_exploding:
