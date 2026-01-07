@@ -5,7 +5,7 @@ import pygame
 
 class Button:
     def __init__(self, text: Text, position: Position, size=(400, 100),
-                 color=(50, 50, 50), hover_color=(25, 25, 25)):
+                 color=(50, 50, 50), hover_color=(75, 75, 75)):
         self.text = text
         self.hitbox = Hitbox(position, *size)
         self.color = color

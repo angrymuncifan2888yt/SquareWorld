@@ -29,7 +29,7 @@ class Game:
     def mainloop(self):
         while True:
             pygame.display.update()
-            self.screen.fill((0, 0, 0))
+            self.screen.fill((25, 25, 25))
 
             delta = self.clock.tick(60) / 1000
             pg_event = pygame.event.get()

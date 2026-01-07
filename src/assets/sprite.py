@@ -27,7 +27,7 @@ class Sprites:
             (100, 120))
         cls.ANGRY_MUNCI_TEXTURE = pygame.transform.scale(
             pygame.image.load(os.path.join("assets", "img", "angry_munci.png")).convert_alpha(),
-            (100, 120))
+            (120, 120))
 
         cls.BREAKING_STAGES = [
             pygame.image.load(os.path.join("assets", "img", "destroy_stage_0.png")),
