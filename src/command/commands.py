@@ -73,6 +73,10 @@ def command_spawn(world: "World", parsed_command: ParsedCommand):
         ent = NextbotAsya(world, Position(x, y), parsed_command.data)
         world.add_entity(ent)
 
+    elif parsed_command.args[0] == "super_munci":
+        ent = NextbotSuperMunci(world, Position(x, y), parsed_command.data)
+        world.add_entity(ent)
+
     return "Succefly spawned in entity"
 
 

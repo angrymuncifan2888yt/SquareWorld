@@ -14,7 +14,8 @@ class RendererEntity:
         EntityTriangle: RendererEntityTriangle,
         EntityMedkit: RendererEntityMedkit,
         NextbotAsya: RendererNextbotAsya,
-        NextbotAngryMunci: RendererNextbotAngryMunci
+        NextbotAngryMunci: RendererNextbotAngryMunci,
+        NextbotSuperMunci: RendererNextbotSuperMunci
     }
     @staticmethod
     def render(screen, entity, camera=None):
