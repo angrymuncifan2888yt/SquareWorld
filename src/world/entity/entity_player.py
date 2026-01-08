@@ -37,3 +37,7 @@ class EntityPlayer(Entity):
 
     def onBombExplosionCollision(self, bomb):
         pass  # Immune to bomb
+
+    def stop_sound(self):
+        Sound.DAMAGE.stop()
+        Sound.HEAL.stop()

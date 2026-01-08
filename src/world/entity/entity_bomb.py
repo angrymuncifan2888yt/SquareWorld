@@ -86,3 +86,6 @@ class EntityBomb(Entity):
 
     def onBombExplosionCollision(self, bomb):
         pass  # Immune to bomb
+
+    def stop_sound(self):
+        Sound.EXPLOSION.stop()

@@ -27,6 +27,7 @@ class World:
         self.blocks.append(block)
 
     def remove_entity(self, entity):
+        entity.stop_sound()
         self.entities.remove(entity)
     
     def remove_block(self, block):
@@ -56,7 +57,7 @@ class World:
                 if entity != other and entity.hitbox.collides_hitbox(other.hitbox):
                     entity.onEntityCollision(other)
 
-    def stop(self):
+    def stop_sound(self):
         for entity in self.entities:
-            entity.stop()
+            entity.stop_sound()
     

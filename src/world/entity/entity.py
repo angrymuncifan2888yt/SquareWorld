@@ -36,5 +36,5 @@ class Entity:
     def destroy(self):
         self.world.remove_entity(self)
 
-    def stop(self):
+    def stop_sound(self):
         pass
