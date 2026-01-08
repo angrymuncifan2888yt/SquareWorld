@@ -1,5 +1,6 @@
 from common import ParsedCommand
 from .commands import *
+from .command_parser import CommandParser
 
 
 COMMANDS = {
@@ -13,8 +14,9 @@ COMMANDS = {
     "spawnpoint": command_spawnpoint,
     "speed": command_speed
 }
-def execute_command(game_world, parsed_command: ParsedCommand):
+def execute_command(game_world, command: str):
     try:
+        parsed_command = CommandParser.parse(command)
         return COMMANDS[parsed_command.name](game_world, parsed_command)
     except Exception as error:
         return error

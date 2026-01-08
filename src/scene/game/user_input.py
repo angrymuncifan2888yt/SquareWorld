@@ -93,5 +93,5 @@ def user_input(self, pg_event, delta):
                         if self.world.player.god_mode:
                             self.world.remove_block(block)
                         block.damage(1)
-                        Sound.breaking()
+                        Sound.BREAKING.play_oncea()
                         break

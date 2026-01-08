@@ -50,8 +50,7 @@ class HUD:
         if self.do_type:
             res = self.typing_field.type(pg_event, delta)
             if res:
-                parsed_cmd = CommandParser.parse(res)
-                result = execute_command(world, parsed_cmd)
+                result = execute_command(world, res)
 
                 if isinstance(result, Exception):
                     self.command_result_message.color = (200, 0, 0)
