@@ -63,6 +63,7 @@ def user_input(self, pg_event, delta):
 
                 elif event.key == pygame.K_RETURN:
                     self.scene_manager.set_scene(SceneList.MAIN_MENU)
+                    self.world.stop()
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
             if event.button == 1:

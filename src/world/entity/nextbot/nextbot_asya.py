@@ -13,3 +13,6 @@ class NextbotAsya(EntityNextbot):
     def destroy(self):
         Sound.ASYA_AMBIENCE.stop()
         super().destroy()
+
+    def stop(self):
+        Sound.ASYA_AMBIENCE.stop()

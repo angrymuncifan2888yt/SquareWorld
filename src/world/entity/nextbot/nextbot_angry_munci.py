@@ -16,3 +16,6 @@ class NextbotAngryMunci(EntityNextbot):
     def destroy(self):
         Sound.ANGRY_MUNCI_AMBIENCE.stop()
         super().destroy()
+
+    def stop(self):
+        Sound.ANGRY_MUNCI_AMBIENCE.stop()

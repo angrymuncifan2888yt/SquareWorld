@@ -55,3 +55,8 @@ class World:
             for other in self.entities:
                 if entity != other and entity.hitbox.collides_hitbox(other.hitbox):
                     entity.onEntityCollision(other)
+
+    def stop(self):
+        for entity in self.entities:
+            entity.stop()
+    
