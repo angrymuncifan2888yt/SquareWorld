@@ -16,28 +16,33 @@ def calculate_sound_volume(source_pos, listener_pos, max_distance):
 
 
 class AdvancedSound:
-    def __init__(self, sound: pygame.mixer.Sound):
+    def __init__(self, sound: pygame.mixer.Sound, base_volume: float = 1.0):
         self.sound = sound
+        self.base_volume = max(0.0, min(1.0, base_volume))
         self.channel: pygame.mixer.Channel | None = None
 
-    def play_once(self, volume: float = 1):
-        if volume <= 0:
+    def set_base_volume(self, volume: float):
+        self.base_volume = max(0.0, min(1.0, volume))
+
+    def play_once(self, volume: float = 1.0):
+        final_volume = self.base_volume * volume
+        if final_volume <= 0:
             return
-        self.sound.set_volume(volume)
+        self.sound.set_volume(final_volume)
         self.sound.play()
 
-    def play_looped(self, volume: float = 1):
-        if volume <= 0:
+    def play_looped(self, volume: float = 1.0):
+        final_volume = self.base_volume * volume
+
+        if final_volume <= 0:
             self.stop()
             return
 
         if self.channel is None or not self.channel.get_busy():
-            self.channel = self.sound.play()
-            if self.channel:
-                self.channel.set_volume(volume)
+            self.channel = self.sound.play(loops=-1)
 
-        elif self.channel:
-            self.channel.set_volume(volume)
+        if self.channel:
+            self.channel.set_volume(final_volume)
 
     def stop(self):
         if self.channel:
