@@ -10,8 +10,10 @@ class World:
         self.entities.append(player)
 
         self.blocks: List[Block] = []
+
         self.delta = 1
         self.delta_multiplier = 1.0
+        self.nextbot_ai = True
 
     @property
     def player(self) -> EntityPlayer:

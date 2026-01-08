@@ -137,3 +137,13 @@ def command_speed(world: "World", parsed_command: ParsedCommand):
 
     world.player.speed = value
     return f"Set player speed to {value}"
+
+
+def command_nextbotai(world: "World", parsed_command: ParsedCommand):
+    value = True if parsed_command.args[0] == "True" else False
+    world.nextbot_ai = value
+    if value == True:
+        return "Nextbot AI: on"
+
+    else:
+        return "Nextbot AI: disabled"
