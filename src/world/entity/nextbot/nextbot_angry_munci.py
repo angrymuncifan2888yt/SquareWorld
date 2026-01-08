@@ -12,3 +12,7 @@ class NextbotAngryMunci(EntityNextbot):
 
     def onBombExplosionCollision(self, bomb):
         pass  # Immune to bomb
+
+    def destroy(self):
+        Sound.ANGRY_MUNCI_AMBIENCE.stop()
+        super().destroy()

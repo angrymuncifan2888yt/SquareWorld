@@ -11,3 +11,7 @@ class NextbotSuperMunci(EntityNextbot):
 
     def onBombExplosionCollision(self, bomb):
         pass  # Immune to bomb
+
+    def destroy(self):
+        Sound.SUPER_MUNCI_AMBIENCE.stop()
+        super().destroy()

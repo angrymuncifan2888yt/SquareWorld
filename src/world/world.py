@@ -34,7 +34,9 @@ class World:
 
     def clear_entities(self):
         player = self.entities[0]
-        self.entities.clear()
+        copy = self.entities.copy()
+        for entity in copy:
+            entity.destroy()
         self.entities.append(player)
     
     def clear_blocks(self):

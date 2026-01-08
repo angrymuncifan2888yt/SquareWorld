@@ -9,3 +9,7 @@ class NextbotAsya(EntityNextbot):
     def update(self, delta: float):
         super().update(delta)
         Sound.ASYA_AMBIENCE.play_looped(calculate_sound_volume(self.position, self.world.player.position, 1000))
+
+    def destroy(self):
+        Sound.ASYA_AMBIENCE.stop()
+        super().destroy()

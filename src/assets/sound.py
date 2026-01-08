@@ -31,12 +31,11 @@ class AdvancedSound:
             self.stop()
             return
 
-        # Если канал пустой или звук закончил играть — запускаем заново
         if self.channel is None or not self.channel.get_busy():
             self.channel = self.sound.play()
             if self.channel:
                 self.channel.set_volume(volume)
-        # Если звук играет — просто меняем громкость
+
         elif self.channel:
             self.channel.set_volume(volume)
 
