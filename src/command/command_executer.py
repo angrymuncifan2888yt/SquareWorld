@@ -1,4 +1,3 @@
-from common import ParsedCommand
 from .commands import *
 from .command_parser import CommandParser
 
