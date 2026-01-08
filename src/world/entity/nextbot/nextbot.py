@@ -2,17 +2,16 @@ import pygame
 from ..entity import Entity
 from ..entity_player import EntityPlayer
 import pygame
+from assets import calculate_sound_volume, AdvancedSound
 
-class EntityNextbot(Entity):
-    @classmethod
-    def ambience(self) -> pygame.mixer.Sound:
-        pass
-    
-    def __init__(self, world, position, width, height, speed=1000, turn_speed=2, creation_params=None):
+
+class EntityNextbot(Entity):    
+    def __init__(self, world, position, width, height, ambience: AdvancedSound, speed=1000, turn_speed=2, creation_params=None):
         super().__init__(world, position, width, height, creation_params)
         self.speed = speed
         self.turn_speed = turn_speed
         self.velocity = pygame.Vector2(1, 0)
+        self.ambience = ambience
 
     def update(self, delta):
         if self.world.nextbot_ai:
@@ -32,7 +31,12 @@ class EntityNextbot(Entity):
 
             self.position.x += self.velocity.x * self.speed * delta
             self.position.y += self.velocity.y * self.speed * delta
+        
+        self.ambience.play_looped(calculate_sound_volume(self.position, self.world.player.position, 800))
 
     def onEntityCollision(self, entity):
         if isinstance(entity, EntityPlayer):
             entity.kill()
+
+    def stop_sound(self):
+        self.ambience.stop()

@@ -2,7 +2,7 @@ from .entity import Entity
 from core import Timer, Hitbox, Position
 from graphics import Text
 from .entity_player import EntityPlayer
-from assets import Fonts, Sound, calculate_sound_volume
+from assets import Fonts, SoundStorage, calculate_sound_volume, AdvancedSound
 
 
 class EntityBomb(Entity):
@@ -25,6 +25,8 @@ class EntityBomb(Entity):
                 self.explosion_timer = Timer(creation_params["explosion_time"])
             if creation_params.get("damage_timer"):
                 self.damage_timer = Timer(creation_params.get("damage_timer"))
+        
+        self.explosion_sound = AdvancedSound(SoundStorage.EXPLOSION)
 
     def explode(self):
         self.is_exploding = True
@@ -43,8 +45,7 @@ class EntityBomb(Entity):
         self.damage_timer.reset()
         self.can_damage = True
 
-        
-        Sound.EXPLOSION.play_once(calculate_sound_volume(self.position, self.world.player.position, 1500))
+        self.explosion_sound.play_once(calculate_sound_volume(self.position, self.world.player.position, 1500))
 
     def onBlockCollision(self, block):
         if not self.is_exploding:
@@ -88,4 +89,4 @@ class EntityBomb(Entity):
         pass  # Immune to bomb
 
     def stop_sound(self):
-        Sound.EXPLOSION.stop()
+        self.explosion_sound.stop()

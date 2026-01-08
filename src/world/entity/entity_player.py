@@ -1,7 +1,7 @@
 from .entity import Entity
 from common import HpSystem
 from common import const
-from assets import Sound
+from assets import SoundStorage
 
 
 class EntityPlayer(Entity):
@@ -20,16 +20,16 @@ class EntityPlayer(Entity):
     def damage(self, hp):
         if not self.god_mode:
             self.hp.damage(hp)
-            Sound.DAMAGE.play_once()
+            SoundStorage.DAMAGE.play()
     
     def add_hp(self, hp):
         self.hp.add_hp(hp)
-        Sound.HEAL.play_once()
+        SoundStorage.HEAL.play()
         
     def kill(self):
         if not self.god_mode:
             self.hp.kill()
-            Sound.DAMAGE.play_once()
+            SoundStorage.DAMAGE.play()
             
     def onBlockCollision(self, block):
         if not self.god_mode:
@@ -37,7 +37,3 @@ class EntityPlayer(Entity):
 
     def onBombExplosionCollision(self, bomb):
         pass  # Immune to bomb
-
-    def stop_sound(self):
-        Sound.DAMAGE.stop()
-        Sound.HEAL.stop()

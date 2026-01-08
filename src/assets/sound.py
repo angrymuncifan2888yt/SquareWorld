@@ -1,4 +1,3 @@
-import os
 import pygame
 import math
 
@@ -24,6 +23,11 @@ class AdvancedSound:
     def set_base_volume(self, volume: float):
         self.base_volume = max(0.0, min(1.0, volume))
 
+    def update_volume(self, volume: float):
+        final_volume = max(0.0, min(1.0, self.base_volume * volume))
+        if self.channel:
+            self.channel.set_volume(final_volume)
+            
     def play_once(self, volume: float = 1.0):
         final_volume = self.base_volume * volume
         if final_volume <= 0:
@@ -50,35 +54,21 @@ class AdvancedSound:
             self.channel = None
 
 
-class Sound:
-    DAMAGE: AdvancedSound = None
-    HEAL: AdvancedSound = None
-    EXPLOSION: AdvancedSound = None
-    BREAKING: AdvancedSound = None
-    ANGRY_MUNCI_AMBIENCE: AdvancedSound = None
-    ASYA_AMBIENCE: AdvancedSound = None
-    SUPER_MUNCI_AMBIENCE: AdvancedSound = None
+class SoundStorage:
+    DAMAGE = None
+    HEAL = None
+    EXPLOSION = None
+    BREAKING = None
+    ANGRY_MUNCI_AMBIENCE = None
+    ASYA_AMBIENCE = None
+    SUPER_MUNCI_AMBIENCE = None
 
     @classmethod
     def init(cls):
-        cls.DAMAGE = AdvancedSound(
-            pygame.mixer.Sound("assets/sound/damage.mp3")
-        )
-        cls.HEAL = AdvancedSound(
-            pygame.mixer.Sound("assets/sound/heal.mp3")
-        )
-        cls.EXPLOSION = AdvancedSound(
-            pygame.mixer.Sound("assets/sound/explosion.mp3")
-        )
-        cls.BREAKING = AdvancedSound(
-            pygame.mixer.Sound("assets/sound/breaking.mp3")
-        )
-        cls.ANGRY_MUNCI_AMBIENCE = AdvancedSound(
-            pygame.mixer.Sound("assets/sound/angry_munci_ambience.mp3")
-        )
-        cls.ASYA_AMBIENCE = AdvancedSound(
-            pygame.mixer.Sound("assets/sound/asya_ambience.mp3")
-        )
-        cls.SUPER_MUNCI_AMBIENCE = AdvancedSound(
-            pygame.mixer.Sound("assets/sound/super_munci_ambience.mp3")
-        )
+        cls.DAMAGE = pygame.mixer.Sound("assets/sound/damage.mp3")
+        cls.HEAL = pygame.mixer.Sound("assets/sound/heal.mp3")
+        cls.EXPLOSION = pygame.mixer.Sound("assets/sound/explosion.mp3")
+        cls.BREAKING = pygame.mixer.Sound("assets/sound/breaking.mp3")
+        cls.ANGRY_MUNCI_AMBIENCE = pygame.mixer.Sound("assets/sound/angry_munci_ambience.mp3")
+        cls.ASYA_AMBIENCE = pygame.mixer.Sound("assets/sound/asya_ambience.mp3")
+        cls.SUPER_MUNCI_AMBIENCE = pygame.mixer.Sound("assets/sound/super_munci_ambience.mp3")

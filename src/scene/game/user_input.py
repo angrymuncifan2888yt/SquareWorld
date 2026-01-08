@@ -3,7 +3,7 @@ from world.block import *
 from core import Position, Direction
 from common import const
 from ..scene_list import SceneList
-from assets import Sound
+from assets import SoundStorage
 
 
 def user_input(self, pg_event, delta):
@@ -93,5 +93,5 @@ def user_input(self, pg_event, delta):
                         if self.world.player.god_mode:
                             self.world.remove_block(block)
                         block.damage(1)
-                        Sound.BREAKING.play_once()
+                        SoundStorage.BREAKING.play()
                         break

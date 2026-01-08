@@ -1,5 +1,5 @@
 import pygame
-from assets import Sound
+from assets import SoundStorage
 from assets import Fonts, Sprites
 from common import const
 from scene import SceneGame, SceneMainMenu
@@ -14,7 +14,7 @@ class Game:
         pygame.font.init()
         pygame.mixer.init()
         Fonts.init(os.path.join("assets", "fonts", "GameFont.ttf"))
-        Sound.init()
+        SoundStorage.init()
 
         self.screen = pygame.display.set_mode(const.WINDOW_SIZE)
         Sprites.init()
