@@ -15,6 +15,8 @@ class Game:
         pygame.mixer.init()
         Fonts.init(os.path.join("assets", "fonts", "GameFont.ttf"))
         SoundStorage.init()
+        pygame.mixer.music.load("assets/sound/background_music.mp3")
+        pygame.mixer.music.set_volume(0.5)
 
         self.screen = pygame.display.set_mode(const.WINDOW_SIZE)
         Sprites.init()
@@ -27,6 +29,7 @@ class Game:
         self.scene_manager.set_scene(SceneList.MAIN_MENU)
 
     def mainloop(self):
+        pygame.mixer.music.play()
         while True:
             pygame.display.update()
             self.screen.fill((25, 25, 25))
