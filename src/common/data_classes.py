@@ -27,7 +27,7 @@ class HpSystem:
     def add_hp(self, hp):
         self.hp += hp
         if self.hp > self.max_hp:
-            self.hp = Const.PLAYER_MAX_HP
+            self.hp = self.max_hp
 
     def revive(self):
         self.hp = self.max_hp
