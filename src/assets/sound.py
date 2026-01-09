@@ -18,7 +18,23 @@ class AdvancedSound:
     def __init__(self, sound: pygame.mixer.Sound, base_volume: float = 1.0):
         self.sound = sound
         self.base_volume = max(0.0, min(1.0, base_volume))
-        self.channel: pygame.mixer.Channel | None = None
+        self.channel: pygame.mixer.Channel | None = pygame.mixer.find_channel(True)
+
+    def play_looped(self, volume: float = 1.0):
+        final_volume = self.base_volume * volume
+        if final_volume <= 0:
+            self.stop()
+            return
+
+        if self.channel and not self.channel.get_busy():
+            self.channel.play(self.sound, loops=-1)
+
+        if self.channel:
+            self.channel.set_volume(final_volume)
+
+    def stop(self):
+        if self.channel and self.channel.get_busy():
+            self.channel.stop()
 
     def set_base_volume(self, volume: float):
         self.base_volume = max(0.0, min(1.0, volume))
@@ -34,24 +50,6 @@ class AdvancedSound:
             return
         self.sound.set_volume(final_volume)
         self.sound.play()
-
-    def play_looped(self, volume: float = 1.0):
-        final_volume = self.base_volume * volume
-
-        if final_volume <= 0:
-            self.stop()
-            return
-
-        if self.channel is None or not self.channel.get_busy():
-            self.channel = self.sound.play(loops=-1)
-
-        if self.channel:
-            self.channel.set_volume(final_volume)
-
-    def stop(self):
-        if self.channel:
-            self.channel.stop()
-            self.channel = None
 
 
 class SoundStorage:

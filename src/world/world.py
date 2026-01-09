@@ -1,5 +1,6 @@
 from .entity import Entity
 from .block.entity_block import EntityBlock
+from .nextbot.nextbot import EntityNextbot
 from .other import EntityPlayer
 from typing import List
 
@@ -28,20 +29,26 @@ class World:
 
     def clear_entities(self):
         player = self.entities[0]
-        # оставляем только игрока и блоки
         new_entities = [player] + [e for e in self.entities if isinstance(e, EntityBlock)]
-        # удаляем остальные
+
         for e in self.entities:
             if e not in new_entities:
                 e.destroy()
         self.entities = new_entities
 
     def clear_blocks(self):
-        # оставляем все энтити кроме блоков
         new_entities = [e for e in self.entities if not isinstance(e, EntityBlock)]
-        # удаляем блоки
+
         for e in self.entities:
             if isinstance(e, EntityBlock):
+                e.destroy()
+        self.entities = new_entities
+
+    def clear_nextbots(self):
+        new_entities = [e for e in self.entities if not isinstance(e, EntityNextbot)]
+
+        for e in self.entities:
+            if isinstance(e, EntityNextbot):
                 e.destroy()
         self.entities = new_entities
 

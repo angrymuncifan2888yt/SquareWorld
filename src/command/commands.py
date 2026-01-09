@@ -109,6 +109,10 @@ def command_clear(world: "World", parsed_command: ParsedCommand):
         world.clear_blocks()
         return "All blocks cleared"
 
+    elif parsed_command.args[0] == "nextbot":
+        world.clear_nextbots()
+        return "All nextbots cleared"
+
 
 def command_spawnpoint(world: "World", parsed_command: ParsedCommand):
     if parsed_command.args[0] == ".":
