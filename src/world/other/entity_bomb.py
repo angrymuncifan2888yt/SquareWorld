@@ -1,7 +1,8 @@
-from .entity import Entity
+from ..entity import Entity
 from core import Timer, Hitbox, Position
 from graphics import Text
 from .entity_player import EntityPlayer
+from ..block.entity_block import EntityBlock
 from assets import Fonts, SoundStorage, calculate_sound_volume, AdvancedSound
 
 
@@ -50,10 +51,6 @@ class EntityBomb(Entity):
     def onBlockCollision(self, block):
         if not self.is_exploding:
             super().onBlockCollision(block)
-
-        elif self.can_damage:
-            block.damage(2)
-            self.can_damage = False
 
     def onEntityCollision(self, entity):
         if self.is_exploding:

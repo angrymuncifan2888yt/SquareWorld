@@ -1,5 +1,6 @@
 import pygame
 from world.block import *
+from world.block.entity_block import EntityBlock
 from core import Position, Direction
 from common import const
 from ..scene_list import SceneList
@@ -72,7 +73,7 @@ def user_input(self, pg_event, delta):
                 world_x = mouse_x + self.camera.position.x
                 world_y = mouse_y + self.camera.position.y
 
-                self.world.add_block(
+                self.world.add_entity(
                     self.blocks[self.current_block_index](
                         self.world,
                         Position(world_x, world_y)
@@ -85,13 +86,14 @@ def user_input(self, pg_event, delta):
                 world_x = mouse_x + self.camera.position.x
                 world_y = mouse_y + self.camera.position.y
 
-                for block in self.world.blocks[:]:
-                    bx = block.position.x
-                    by = block.position.y
+                for block in self.world.entities[:]:
+                    if isinstance(block, EntityBlock):
+                        bx = block.position.x
+                        by = block.position.y
 
-                    if bx <= world_x <= bx + block.hitbox.width and by <= world_y <= by + block.hitbox.height:
-                        if self.world.player.god_mode:
-                            self.world.remove_block(block)
-                        block.damage(1)
-                        SoundStorage.BREAKING.play()
-                        break
+                        if bx <= world_x <= bx + block.hitbox.width and by <= world_y <= by + block.hitbox.height:
+                            if self.world.player.god_mode:
+                                self.world.remove_block(block)
+                            block.damage(1)
+                            SoundStorage.BREAKING.play()
+                            break

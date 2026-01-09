@@ -1,8 +1,8 @@
 from common import ParsedCommand
 from core import Position
 # from world import World
-from world.entity import *
-from world.entity.nextbot import *
+from world.other import *
+from world.nextbot import *
 
 
 def command_tp(world: "World", parsed_command: ParsedCommand):

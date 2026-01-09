@@ -1,6 +1,6 @@
 import pygame
 from ..entity import Entity
-from ..entity_player import EntityPlayer
+from ..other import EntityPlayer
 import pygame
 from assets import calculate_sound_volume, AdvancedSound
 

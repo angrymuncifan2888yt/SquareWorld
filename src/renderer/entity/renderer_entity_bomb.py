@@ -1,4 +1,4 @@
-from world.entity import EntityBomb
+from world.other import EntityBomb
 from ..graphics import RendererText
 from core import Camera
 import pygame

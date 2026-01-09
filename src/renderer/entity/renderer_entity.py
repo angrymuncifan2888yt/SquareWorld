@@ -3,8 +3,10 @@ from .renderer_entity_triangle import RendererEntityTriangle
 from .renderer_entity_medkit import RendererEntityMedkit
 from .renderer_entity_bomb import RendererEntityBomb
 from .nextbot import *
-from world.entity import *
-from world.entity.nextbot import *
+from .block import RendererBlock
+from world.other import *
+from world.nextbot import *
+from world.block import *
 
 
 class RendererEntity:
@@ -15,7 +17,10 @@ class RendererEntity:
         EntityMedkit: RendererEntityMedkit,
         NextbotAsya: RendererNextbotAsya,
         NextbotAngryMunci: RendererNextbotAngryMunci,
-        NextbotSuperMunci: RendererNextbotSuperMunci
+        NextbotSuperMunci: RendererNextbotSuperMunci,
+        ObsidianBlock: RendererBlock,
+        StoneBlock: RendererBlock,
+        GrassBlock: RendererBlock,
     }
     @staticmethod
     def render(screen, entity, camera=None):

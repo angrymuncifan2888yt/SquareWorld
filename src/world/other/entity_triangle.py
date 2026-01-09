@@ -1,4 +1,4 @@
-from .entity import Entity
+from ..entity import Entity
 from .entity_player import EntityPlayer
 from core import Timer
 

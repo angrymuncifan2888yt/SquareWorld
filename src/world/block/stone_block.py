@@ -1,8 +1,8 @@
-from .block import Block
+from .entity_block import EntityBlock
 from assets import Sprites
 
 
-class StoneBlock(Block):
+class StoneBlock(EntityBlock):
     def __init__(self, world, position):
         super().__init__(world, position, 3)
 

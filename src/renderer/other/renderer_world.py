@@ -1,6 +1,5 @@
 from ..entity import RendererEntity
-from ..block import RendererBlock
-from world.entity import *
+from world.other import *
 from world.block import *
 from .renderer_hitbox import RendererHitbox
 
@@ -13,9 +12,3 @@ class RendererWorld:
 
             if render_hitbox:
                 RendererHitbox.render(screen, entity.hitbox, camera=camera)
-
-        for block in world.blocks:
-            RendererBlock.render(screen, block, camera)
-
-            if render_hitbox:
-                RendererHitbox.render(screen, block.hitbox, camera=camera)

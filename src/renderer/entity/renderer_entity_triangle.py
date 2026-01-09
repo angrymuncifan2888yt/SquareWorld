@@ -1,4 +1,4 @@
-from world.entity import EntityTriangle
+from world.other import EntityTriangle
 from core import Camera
 import pygame
 

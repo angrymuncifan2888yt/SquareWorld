@@ -1,4 +1,4 @@
-from .entity import Entity
+from ..entity import Entity
 from common import HpSystem
 from common import const
 from assets import SoundStorage

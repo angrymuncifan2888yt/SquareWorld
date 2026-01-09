@@ -1,4 +1,4 @@
-from world.entity import EntityMedkit
+from world.other import EntityMedkit
 from core import Camera
 import pygame
 

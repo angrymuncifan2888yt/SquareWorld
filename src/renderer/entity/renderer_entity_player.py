@@ -1,4 +1,4 @@
-from world.entity import EntityPlayer
+from world.other import EntityPlayer
 from core import Camera
 import pygame
 

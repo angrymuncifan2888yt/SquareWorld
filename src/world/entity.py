@@ -27,13 +27,14 @@ class Entity:
     def onEntityCollision(self, entity):
         pass
 
-    def onBombExplosionCollision(self, bomb):
-        self.destroy()
-
     def onBlockCollision(self, block):
         self.hitbox.handle_collision(block.hitbox)
 
+    def onBombExplosionCollision(self, bomb):
+        self.destroy()
+
     def destroy(self):
+        self.stop_sound()
         self.world.remove_entity(self)
 
     def stop_sound(self):
