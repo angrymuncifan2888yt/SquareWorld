@@ -93,7 +93,7 @@ def user_input(self, pg_event, delta):
 
                         if bx <= world_x <= bx + block.hitbox.width and by <= world_y <= by + block.hitbox.height:
                             if self.world.player.god_mode:
-                                self.world.remove_block(block)
+                                self.world.remove_entity(block)
                             block.damage(1)
                             SoundStorage.BREAKING.play()
                             break

@@ -29,7 +29,7 @@ class Game:
         self.scene_manager.set_scene(SceneList.MAIN_MENU)
 
     def mainloop(self):
-        pygame.mixer.music.play()
+        pygame.mixer.music.play(-1)
         while True:
             pygame.display.update()
             self.screen.fill((25, 25, 25))

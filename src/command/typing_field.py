@@ -11,6 +11,8 @@ class TypingField:
 
         self.backspace_timer = Timer(0.05)
         self.text_cursor = TextCursor(self.position)
+        self.arrow_timer = Timer(0.05)  # время между повторениями
+        self.arrow_direction = 0       # -1 = влево, 1 = вправо
 
     def type(self, pg_events, delta: float):
         self.text_cursor.update(delta)
@@ -22,14 +24,6 @@ class TypingField:
                 if event.key == pygame.K_RETURN:
                     command = self.text
                     self.text = ""
-
-                elif event.key == pygame.K_LEFT:
-                    if self.text_cursor.current_symbol > 0:
-                        self.text_cursor.current_symbol -= 1
-
-                elif event.key == pygame.K_RIGHT:
-                    if self.text_cursor.current_symbol < len(self.text):
-                        self.text_cursor.current_symbol += 1
 
                 elif event.key == pygame.K_BACKSPACE:
                     if self.text_cursor.current_symbol > 0:
@@ -57,6 +51,19 @@ class TypingField:
                 self.backspace_timer.reset()
         else:
             self.backspace_timer.reset()
+
+        if self.active:
+            if keys[pygame.K_LEFT]:
+                self.arrow_timer.update(delta)
+                if self.arrow_timer.finished:
+                    self.text_cursor.current_symbol = max(0, self.text_cursor.current_symbol - 1)
+                    self.arrow_timer.reset()
+
+            if keys[pygame.K_RIGHT]:
+                self.arrow_timer.update(delta)
+                if self.arrow_timer.finished:
+                    self.text_cursor.current_symbol = min(len(self.text), self.text_cursor.current_symbol + 1)
+                    self.arrow_timer.reset()
 
         # Moving text cursor
         left_text = self.text[:self.text_cursor.current_symbol]
