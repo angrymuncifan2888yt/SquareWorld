@@ -25,16 +25,12 @@ class World:
         self.entities.append(entity)
 
     def remove_entity(self, entity):
+        entity.stop_sound()
         self.entities.remove(entity)
 
     def clear_entities(self):
-        player = self.entities[0]
-        new_entities = [player] + [e for e in self.entities if isinstance(e, EntityBlock)]
-
-        for e in self.entities:
-            if e not in new_entities:
-                e.destroy()
-        self.entities = new_entities
+        for e in self.entities[1:]:
+            e.destroy()
 
     def clear_blocks(self):
         new_entities = [e for e in self.entities if not isinstance(e, EntityBlock)]
@@ -45,12 +41,9 @@ class World:
         self.entities = new_entities
 
     def clear_nextbots(self):
-        new_entities = [e for e in self.entities if not isinstance(e, EntityNextbot)]
-
-        for e in self.entities:
+        for e in self.entities[:]:
             if isinstance(e, EntityNextbot):
                 e.destroy()
-        self.entities = new_entities
 
     def update(self):
         self.delta *= self.delta_multiplier

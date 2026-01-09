@@ -32,7 +32,8 @@ class EntityNextbot(Entity):
             self.position.x += self.velocity.x * self.speed * delta
             self.position.y += self.velocity.y * self.speed * delta
         
-        self.ambience.play_looped(calculate_sound_volume(self.position, self.world.player.position, 800))
+        volume = calculate_sound_volume(self.position, self.world.player.position, 800)
+        self.ambience.play_looped(volume)
 
     def onEntityCollision(self, entity):
         if isinstance(entity, EntityPlayer):
