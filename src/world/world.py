@@ -32,8 +32,9 @@ class World:
 
     # Removes an entity
     def remove_entity(self, entity):
-        entity.stop_sound()
-        self.entities.remove(entity)
+        if entity in self.entities:  # <-- проверка
+            entity.stop_sound()
+            self.entities.remove(entity)
 
     # Clears all entities
     def clear_entities(self):

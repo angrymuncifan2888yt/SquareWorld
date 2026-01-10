@@ -1,5 +1,6 @@
 import pygame
 from world.block import *
+from world.other import EntityBullet
 from world.block.entity_block import EntityBlock
 from core import Position, Direction
 import const
@@ -55,6 +56,38 @@ def user_input(self, pg_event, delta):
             elif event.key == pygame.K_SLASH:
                 if self.hud.is_on:
                     self.hud.do_type = not self.hud.do_type
+
+            # --- PLAYER SHOOTING ---
+            elif event.key == pygame.K_e and not self.hud.do_type:
+                mouse_x, mouse_y = pygame.mouse.get_pos()
+                # Convert mouse coordinates to world coordinates
+                world_x = mouse_x + self.camera.position.x
+                world_y = mouse_y + self.camera.position.y
+
+                # Calculate direction vector from player to cursor
+                player_pos = self.world.player.position
+
+                # --- INVERT Y AXIS ---
+                direction = Position(
+                    world_x - player_pos.x,
+                    -(world_y - player_pos.y)  # <-- здесь инверсия
+                )
+
+                # Normalize direction vector
+                length = (direction.x ** 2 + direction.y ** 2) ** 0.5
+                if length != 0:
+                    direction.x /= length
+                    direction.y /= length
+
+                # Spawn bullet
+                self.world.add_entity(
+                    EntityBullet(
+                        self.world,
+                        player_pos.copy(),
+                        direction,
+                        source=self.world.player
+                    )
+                )
 
             # Block selection (keys 1–9) and scene reset
             if not self.hud.do_type:
