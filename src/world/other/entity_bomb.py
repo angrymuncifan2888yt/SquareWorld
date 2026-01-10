@@ -1,9 +1,7 @@
 from ..entity import Entity
 from core import Timer, Hitbox, Position
-from graphics import Text
 from .entity_player import EntityPlayer
-from ..block.entity_block import EntityBlock
-from assets import Fonts, SoundStorage, calculate_sound_volume, AdvancedSound
+from assets import SoundStorage, calculate_sound_volume, AdvancedSound
 
 
 class EntityBomb(Entity):
