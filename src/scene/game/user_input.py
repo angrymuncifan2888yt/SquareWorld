@@ -98,6 +98,7 @@ def user_input(self, pg_event, delta):
                             if self.world.player.god_mode:
                                 # Remove block instantly in god mode
                                 self.world.remove_entity(block)
+                                SoundStorage.BREAKING.play()
                             else:
                                 # Damage block and play breaking sound
                                 block.damage(1)

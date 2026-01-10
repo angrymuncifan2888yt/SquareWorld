@@ -61,6 +61,7 @@ class SoundStorage:
     ANGRY_MUNCI_AMBIENCE = None
     ASYA_AMBIENCE = None
     SUPER_MUNCI_AMBIENCE = None
+    KING_MUNCI_ROAR = None
 
     @classmethod
     def init(cls):
@@ -71,3 +72,4 @@ class SoundStorage:
         cls.ANGRY_MUNCI_AMBIENCE = pygame.mixer.Sound("assets/sound/angry_munci_ambience.mp3")
         cls.ASYA_AMBIENCE = pygame.mixer.Sound("assets/sound/asya_ambience.mp3")
         cls.SUPER_MUNCI_AMBIENCE = pygame.mixer.Sound("assets/sound/super_munci_ambience.mp3")
+        cls.KING_MUNCI_ROAR = pygame.mixer.Sound("assets/sound/king_munci_roar.mp3")
