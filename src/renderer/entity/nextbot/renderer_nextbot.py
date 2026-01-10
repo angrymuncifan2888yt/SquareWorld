@@ -1,9 +1,6 @@
-from assets import Sprites
-
-
-class RendererNextbotAngryMunci:
+class RendererNextbot:
     @staticmethod
     def render(screen, nextbot, camera=None):
         nextbot_pos = camera.get_screen_position(nextbot.position) if camera else nextbot.position
 
-        screen.blit(Sprites.ANGRY_MUNCI_TEXTURE, nextbot_pos.to_tuple())
+        screen.blit(nextbot.image(), nextbot_pos.to_tuple())

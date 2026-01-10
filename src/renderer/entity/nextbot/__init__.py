@@ -1,4 +1,1 @@
-from .renderer_nextbot_asya import RendererNextbotAsya
-from .renderer_nextbot_angry_munci import RendererNextbotAngryMunci
-from .renderer_nextbot_super_munci import RendererNextbotSuperMunci
-from .renderer_nextbot_king_munci import RendererNextbotKingMunci
+from .renderer_nextbot import RendererNextbot

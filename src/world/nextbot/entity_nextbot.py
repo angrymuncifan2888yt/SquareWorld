@@ -4,7 +4,10 @@ from ..other import EntityPlayer
 from assets import calculate_sound_volume, AdvancedSound
 
 
-class EntityNextbot(Entity):    
+class EntityNextbot(Entity):
+    @classmethod
+    def image(self):
+        pass
     def __init__(self, world, position, width, height, ambience: AdvancedSound, speed=1000, turn_speed=2, creation_params=None):
         # Initialize the Nextbot entity with given size and movement parameters
         super().__init__(world, position, width, height, creation_params)
