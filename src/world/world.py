@@ -1,6 +1,6 @@
 from .entity import Entity
 from .block.entity_block import EntityBlock
-from .nextbot.nextbot import EntityNextbot
+from .nextbot.entity_nextbot import EntityNextbot
 from .other import EntityPlayer
 from typing import List
 

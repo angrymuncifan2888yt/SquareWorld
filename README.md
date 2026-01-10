@@ -7,6 +7,7 @@ Simple 2d sandbox game
 - Command system/Command parser
 - Time system
 - Text input system
+- Nextbot AI and ambience
 
 # Controls
 - WASD - move
@@ -34,13 +35,17 @@ Press / to enter commands
 - time value - 1 base time, 2 2x faster, 0.5 2x slower and e.t.c
 - clear entity - removes all entities (except player)
 - clear block - removes all blocks 
+- spawnpoint value value - sets player spawnpoint
+- speed value - sets players speed, type default to set default speed
+- nextbot ai True/False - turn on/off nextbot ai
+- nextbot sound True/False - turn on/off nextbot sound
 
 # Look at this
 - [World](src/world/world.py)
-- [Entity](src/world/entity/entity.py)
-- [Block](src/world/block/block.py)
+- [Entity](src/world/entity.py)
+- [Block](src/world/block/entity_block.py)
 - [Timer](src/core/timer.py)
-- [Hitbox](src/core/hitbox.py)
 - [Typing field](src/command/typing_field.py)
-- [Timer](src/core/timer.py)
 - [HpBar](src/graphics/hp_bar.py)
+- [Nextbot](src/world/nextbot/entity_nextbot.py)
+- [Commands](src/command/commands.py)

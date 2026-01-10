@@ -1,4 +1,4 @@
-from .nextbot import EntityNextbot
+from .entity_nextbot import EntityNextbot
 from assets import SoundStorage, AdvancedSound
 
 class NextbotSuperMunci(EntityNextbot):
