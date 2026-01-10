@@ -1,6 +1,6 @@
 import pygame
 import os
-from common import const
+import const
 
 
 class Sprites:

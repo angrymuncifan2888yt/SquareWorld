@@ -1,4 +1,4 @@
-from common import ParsedCommand
+from .parsed_command import ParsedCommand
 import json
 
 

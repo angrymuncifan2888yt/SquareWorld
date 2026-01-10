@@ -1,7 +1,7 @@
 from core import Position, Hitbox
 from .text import Text
 from assets import Fonts
-from common import const
+import const
 
 
 class HpBar:

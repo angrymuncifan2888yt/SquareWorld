@@ -1,5 +1,5 @@
 from command import TypingField
-from common import const
+import const
 from core import Camera
 import pygame
 

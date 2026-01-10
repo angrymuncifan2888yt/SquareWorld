@@ -2,7 +2,7 @@ import pygame
 from world.block import *
 from world.block.entity_block import EntityBlock
 from core import Position, Direction
-from common import const
+import const
 from ..scene_list import SceneList
 from assets import SoundStorage
 

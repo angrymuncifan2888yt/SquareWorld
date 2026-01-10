@@ -3,7 +3,7 @@ from .scene_list import SceneList
 from graphics import Text, Button
 from assets import Fonts
 from core import Position
-from common import const
+import const
 from renderer.graphics import RendererText, RendererButton
 import pygame
 

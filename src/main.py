@@ -1,7 +1,7 @@
 import pygame
 from assets import SoundStorage
 from assets import Fonts, Sprites
-from common import const
+import const
 from scene import SceneGame, SceneMainMenu
 from scene import SceneManager, SceneList
 import os

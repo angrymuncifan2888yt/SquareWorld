@@ -1,4 +1,4 @@
-from common import const
+import const
 from ..entity import Entity
 from ..components import HasHealth
 

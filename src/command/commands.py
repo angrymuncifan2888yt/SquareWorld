@@ -1,4 +1,4 @@
-from common import ParsedCommand
+from .parsed_command import ParsedCommand
 from core import Position, Vec2
 # from world import World
 from world.other import *
