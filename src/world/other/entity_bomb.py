@@ -18,10 +18,6 @@ class EntityBomb(Entity):
         self.is_exploding = False  # Flag indicating if bomb is currently exploding
         self.can_damage = False  # Flag indicating if bomb can currently deal damage
 
-        # Text object to show countdown timer on the bomb
-        self.text_timer = Text(str(self.defuse_timer.time_left), Position(0, 0), Fonts.FONT_30)
-        self.text_timer.center_in_hitbox(self.hitbox)
-
         # Override default timers if provided in creation_params
         if isinstance(creation_params, dict):
             if creation_params.get("defuse_time"):
@@ -76,8 +72,6 @@ class EntityBomb(Entity):
         if not self.is_exploding:
             # Update defuse countdown
             self.defuse_timer.update(delta)
-            self.text_timer.text = str(round(self.defuse_timer.time_left, 1))
-            self.text_timer.center_in_hitbox(self.hitbox)
 
             # Trigger explosion if timer finishes
             if self.defuse_timer.finished:

@@ -1,0 +1,4 @@
+from .renderer_entity_bomb import RendererEntityBomb
+from .renderer_entity_medkit import RendererEntityMedkit
+from .renderer_entity_player import RendererEntityPlayer
+from .renderer_entity_triangle import RendererEntityTriangle

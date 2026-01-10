@@ -1,6 +1,8 @@
 from world.other import EntityBomb
 from renderer.graphics import RendererText
-from core import Camera
+from core import Camera, Position
+from graphics import Text
+from assets import Fonts
 import pygame
 
 
@@ -13,4 +15,7 @@ class RendererEntityBomb:
         screen.blit(surface, (pos.x, pos.y))
 
         if not bomb.is_exploding:
-            RendererText.render(screen, bomb.text_timer, camera)
+            # Text object to show countdown timer on the bomb
+            text_timer = Text(str(round(bomb.defuse_timer.time_left, 1)), Position(0, 0), Fonts.FONT_30)
+            text_timer.center_in_hitbox(bomb.hitbox)
+            RendererText.render(screen, text_timer, camera)

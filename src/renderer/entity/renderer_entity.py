@@ -1,7 +1,4 @@
-from .other.renderer_entity_player import RendererEntityPlayer
-from .other.renderer_entity_triangle import RendererEntityTriangle
-from .other.renderer_entity_medkit import RendererEntityMedkit
-from .other.renderer_entity_bomb import RendererEntityBomb
+from .other import RendererEntityTriangle, RendererEntityBomb, RendererEntityMedkit, RendererEntityPlayer
 from .nextbot import *
 from .block import RendererBlock
 from world.other import *
