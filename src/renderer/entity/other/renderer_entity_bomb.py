@@ -1,5 +1,5 @@
 from world.other import EntityBomb
-from ..graphics import RendererText
+from renderer.graphics import RendererText
 from core import Camera
 import pygame
 
