@@ -14,6 +14,11 @@ class EntityNextbot(Entity):
         self.ambience = ambience  # Ambient sound associated with this bot
 
     def update(self, delta):
+        # Play ambient sound with volume based on distance to player (if on)
+        if self.world.nextbot_sound:
+            volume = calculate_sound_volume(self.position, self.world.player.position, 800)
+            self.ambience.play_looped(volume)
+
         # Move the bot towards the player if AI is enabled
         if self.world.nextbot_ai:
             player_pos = pygame.Vector2(self.world.player.position.x,
@@ -34,10 +39,6 @@ class EntityNextbot(Entity):
             # Update bot position based on velocity, speed, and delta time
             self.position.x += self.velocity.x * self.speed * delta
             self.position.y += self.velocity.y * self.speed * delta
-        
-        # Play ambient sound with volume based on distance to player
-        volume = calculate_sound_volume(self.position, self.world.player.position, 800)
-        self.ambience.play_looped(volume)
 
     def onEntityCollision(self, entity):
         # If bot collides with player, instantly kill the player

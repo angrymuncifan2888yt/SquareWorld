@@ -14,8 +14,9 @@ class World:
         self.delta = 1
         self.delta_multiplier = 1.0
 
-        # If on nextbots will chase players, else they will stand stil
+        # Nextbots settings
         self.nextbot_ai = True
+        self.nextbot_sound = True
 
     # Player property/setter so entities can write world.player...
     @property
@@ -53,6 +54,13 @@ class World:
         for e in self.entities[:]:
             if isinstance(e, EntityNextbot):
                 e.destroy()
+
+    # Disable all nextbots sound
+    def disable_nextbots_sound(self):
+        self.nextbot_sound = False
+        for nextbot in self.entities:
+            if isinstance(nextbot, EntityNextbot):
+                nextbot.stop_sound()
 
     # Update all entities and world itself
     def update(self):

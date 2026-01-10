@@ -12,7 +12,7 @@ COMMANDS = {
     "clear": command_clear,
     "spawnpoint": command_spawnpoint,
     "speed": command_speed,
-    "nextbotai": command_nextbotai
+    "nextbot": command_nextbot
 }
 def execute_command(game_world, command: str):
     try:
