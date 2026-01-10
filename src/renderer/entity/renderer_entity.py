@@ -15,6 +15,7 @@ class RendererEntity:
         NextbotAsya: RendererNextbotAsya,
         NextbotAngryMunci: RendererNextbotAngryMunci,
         NextbotSuperMunci: RendererNextbotSuperMunci,
+        NextbotKingMunci: RendererNextbotKingMunci,
         ObsidianBlock: RendererBlock,
         StoneBlock: RendererBlock,
         GrassBlock: RendererBlock,

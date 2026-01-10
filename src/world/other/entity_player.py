@@ -22,8 +22,9 @@ class EntityPlayer(BombImmune, Entity, HasHealth):
         SoundStorage.DAMAGE.play()
 
     def damage(self, amount):
-        super().damage(amount)
-        SoundStorage.DAMAGE.play()
+        if not self.god_mode:
+            super().damage(amount)
+            SoundStorage.DAMAGE.play()
 
     def kill(self):
         # Instantly kill the player if not in god mode

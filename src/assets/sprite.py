@@ -11,6 +11,7 @@ class Sprites:
     ASYA_TEXTURE = None
     ANGRY_MUNCI_TEXTURE = None
     SUPER_MUNCI_TEXTURE = None
+    KING_MUNCI_TEXTURE = None
 
     @classmethod
     def init(cls):
@@ -32,6 +33,9 @@ class Sprites:
         cls.SUPER_MUNCI_TEXTURE = pygame.transform.scale(
             pygame.image.load(os.path.join("assets", "img", "super_munci.png")).convert_alpha(),
             (120, 120))
+        cls.KING_MUNCI_TEXTURE = pygame.transform.scale(
+            pygame.image.load(os.path.join("assets", "img", "king_munci.png")).convert_alpha(),
+            (120, 140))
 
         cls.BREAKING_STAGES = [
             pygame.image.load(os.path.join("assets", "img", "destroy_stage_0.png")),

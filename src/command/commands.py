@@ -73,6 +73,9 @@ def command_spawn(world: "World", parsed_command: ParsedCommand):
     elif parsed_command.args[0] == "super_munci":
         ent = NextbotSuperMunci(world, Position(x, y), parsed_command.data)
         world.add_entity(ent)
+    elif parsed_command.args[0] == "king_munci":
+        ent = NextbotKingMunci(world, Position(x, y), parsed_command.data)
+        world.add_entity(ent)
 
     return "Successfully spawned entity"
 
