@@ -1,5 +1,5 @@
 from common import ParsedCommand
-from core import Position
+from core import Position, Vec2
 # from world import World
 from world.other import *
 from world.nextbot import *
@@ -26,10 +26,10 @@ def command_hp(world: "World", parsed_command: ParsedCommand):
     # Adjust player's HP
     if parsed_command.args[0] == "heal":
         if parsed_command.args[1].isdigit():
-            world.player.hp.add_hp(int(parsed_command.args[1]))
+            world.player.heal(int(parsed_command.args[1]))
             return "Healed player"
         elif parsed_command.args[1] == "+":
-            world.player.hp.revive()
+            world.player.revive()
             return "Fully healed player"
 
     elif parsed_command.args[0] == "damage":
@@ -76,7 +76,10 @@ def command_spawn(world: "World", parsed_command: ParsedCommand):
     elif parsed_command.args[0] == "king_munci":
         ent = NextbotKingMunci(world, Position(x, y), parsed_command.data)
         world.add_entity(ent)
-
+    elif parsed_command.args[0] == "bullet":
+        ent = EntityBullet(world, Position(x, y), Vec2(float(parsed_command.args[3])), parsed_command.data)
+        world.add_entity(ent)
+    
     return "Successfully spawned entity"
 
 

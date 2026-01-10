@@ -1,4 +1,4 @@
-from .other import RendererEntityTriangle, RendererEntityBomb, RendererEntityMedkit, RendererEntityPlayer
+from .other import *
 from .nextbot import *
 from .block import RendererBlock
 from world.other import *
@@ -19,6 +19,7 @@ class RendererEntity:
         ObsidianBlock: RendererBlock,
         StoneBlock: RendererBlock,
         GrassBlock: RendererBlock,
+        EntityBullet: RendererEntityBullet
     }
     @staticmethod
     def render(screen, entity, camera=None):
