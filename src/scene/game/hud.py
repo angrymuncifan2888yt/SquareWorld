@@ -18,7 +18,7 @@ class HUD:
         self.do_type = False  # Whether the player is currently typing a command
 
         # Player health bar
-        self.hp_bar = HpBar(Position(10, 0), world.player.hp.hp)
+        self.hp_bar = HpBar(Position(10, 0), world.player.hp)
 
         # Text fields for debugging
         self.player_pos_text = Text("", Position(10, 10), Fonts.FONT_30)
@@ -50,8 +50,8 @@ class HUD:
         self.chosen_block = chosen_block
 
         # Update HP bar with current player health
-        self.hp_bar.set_max_value(world.player.hp.max_hp)
-        self.hp_bar.value = world.player.hp.hp
+        self.hp_bar.set_max_value(world.player.max_hp)
+        self.hp_bar.value = world.player.hp
 
         # Move HP bar lower if debug info is displayed
         self.hp_bar.position.y = 175 if debug else 50

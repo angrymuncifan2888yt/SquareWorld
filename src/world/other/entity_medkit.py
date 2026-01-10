@@ -11,6 +11,6 @@ class EntityMedkit(Entity):
         # When a player collides with the medkit
         if isinstance(entity, EntityPlayer):
             # Only heal if player's HP is not full
-            if entity.hp.hp < entity.hp.max_hp:
-                entity.add_hp(40)  # Heal the player by 40 HP
-                self.world.remove_entity(self)  # Remove the medkit from the world
+            if entity.hp < entity.max_hp:
+                entity.heal(40)  # Heal the player by 40 HP
+                self.destroy()
