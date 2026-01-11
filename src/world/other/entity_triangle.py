@@ -1,5 +1,5 @@
 from ..entity import Entity
-from .entity_player import EntityPlayer
+from ..components import HasHealth
 from core import Timer
 
 
@@ -31,8 +31,8 @@ class EntityTriangle(Entity):
 
     def onEntityCollision(self, entity):
         # Handle collision with another entity
-        if isinstance(entity, EntityPlayer):
-            # If the triangle can deal damage, inflict damage to the player
+        if isinstance(entity, HasHealth):
+            # If the triangle can deal damage, inflict damage to the entity
             if self.can_damage:
                 entity.damage(40)
                 self.can_damage = False  # Disable further damage until timer resets

@@ -1,5 +1,5 @@
 from ..entity import Entity
-from .entity_player import EntityPlayer
+from ..components import HasHealth
 
 
 class EntityMedkit(Entity):
@@ -8,9 +8,9 @@ class EntityMedkit(Entity):
         super().__init__(world, position, 25, 25, creation_params)
 
     def onEntityCollision(self, entity):
-        # When a player collides with the medkit
-        if isinstance(entity, EntityPlayer):
-            # Only heal if player's HP is not full
+        # When a entity with health system collides with the medkit
+        if isinstance(entity, HasHealth):
+            # Only heal if entity HP is not full
             if entity.hp < entity.max_hp:
-                entity.heal(40)  # Heal the player by 40 HP
+                entity.heal(40)  # Heal the entity by 40 HP
                 self.destroy()
