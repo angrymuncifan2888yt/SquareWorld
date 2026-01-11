@@ -18,7 +18,7 @@ class SceneMainMenu(Scene):
         self.text_title.center_by_x(const.WINDOW_SIZE[0])
 
         # Play button in the center
-        self.button_play = Button(Text("Press enter to play", Position(0, 0), Fonts.FONT_30), Position(100, 120))
+        self.button_play = Button(Text("Press enter to play", Position(0, 0), Fonts.FONT_30), Position(100, 120), self._button_play_clicked)
         self.button_play.center_by_x(const.WINDOW_SIZE[0])
 
         # Music checkbox
@@ -33,15 +33,15 @@ class SceneMainMenu(Scene):
         else:
             pygame.mixer.music.stop()
 
+    def _button_play_clicked(self):
+        self.scene_manager.set_scene(SceneList.GAME)
+
     def input(self, *args, **kwargs):
         # Handle user input events
         pg_event = kwargs["pg_event"]
 
         self.checkbox_music.update(pg_event)
-
-        # Check if the play button is clicked
-        if self.button_play.isClicked(pg_event):
-            self.scene_manager.set_scene(SceneList.GAME)
+        self.button_play.update(pg_event)
 
         # Check if Enter key is pressed to start the game
         for event in pg_event:

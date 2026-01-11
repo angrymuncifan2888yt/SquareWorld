@@ -4,14 +4,21 @@ import pygame
 
 
 class Button:
-    def __init__(self, text: Text, position: Position, size=(400, 100),
+    def __init__(self, text: Text, position: Position, on_clicked=None, size=(400, 100),
                  color=(50, 50, 50), hover_color=(75, 75, 75)):
         self.text = text
         self.hitbox = Hitbox(position, *size)
         self.color = color
         self.hover_color = hover_color
+        self.on_clicked = on_clicked
         
         self.center_text()
+
+    def update(self, pg_event):
+        if self.isClicked(pg_event):
+            if callable(self.on_clicked):
+                self.on_clicked()
+
     def center_text(self):
         if self.text:
             self.text.center_in_hitbox(self.hitbox)
