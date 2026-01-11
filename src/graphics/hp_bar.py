@@ -1,31 +1,23 @@
 from core import Position, Hitbox
-from .text import Text
-from assets import Fonts
 import const
 
 
 class HpBar:
-    def __init__(self, position: Position, value: int):
-        self.hitbox = Hitbox(position, 200, 50)
-        self.__value = value
+    def __init__(self, position: Position, value: int, width=200, height=50,
+                 fill_color = (0,255,0), background_color=(255, 0, 0), border_color = (100, 100, 100)):
+        self.hitbox = Hitbox(position, width, height)
+        self.value = value
         self.max_value = const.PLAYER_DEFAULT_MAX_HP
-        self.text = Text(str(self.value), Position(0, 0), Fonts.FONT_30)
-        self.text.center_in_hitbox(self.hitbox)
+        self.fill_color = fill_color
+        self.background_color = background_color
+        self.border_color = border_color
 
     def set_max_value(self, max_value: int):
         self.max_value = max(1, max_value)
         self.value = min(self.value, self.max_value)
 
-    @property
-    def value(self):
-        return self.__value
-
-    @value.setter
-    def value(self, value2):
-        self.__value = value2
-        self.text.text = str(value2)
-        self.text.center_in_hitbox(self.hitbox)
-
+    def center_by_x(self, width):
+        self.hitbox.position.x = width/2 - self.hitbox.width/2
     @property
     def position(self):
         return self.hitbox.position

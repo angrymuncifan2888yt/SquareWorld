@@ -5,7 +5,9 @@ from graphics import HpBar, Text, TempText
 from assets import Fonts
 from renderer.graphics import RendererHpBar, RendererText
 from renderer.other import RendererTypingField
+from world.nextbot import NextbotKingMunci
 from core import Timer
+import const
 from command import TypingField, CommandParser, execute_command
 
 
@@ -40,6 +42,11 @@ class HUD:
 
         self.chosen_block = None  # Currently selected block
 
+        # King Munci hp bar
+        self.boss_hp_bar = HpBar(Position(360, 50), 0, 600, 50, (140, 20, 50), (20, 15, 25), (160, 130, 40))
+        self.boss_hp_bar.center_by_x(const.WINDOW_SIZE[0])
+        self.show_boss_hp = False
+
     def update(self, pg_event, delta, world, debug, chosen_block):
         if not self.is_on:
             return
@@ -52,6 +59,20 @@ class HUD:
         # Update HP bar with current player health
         self.hp_bar.set_max_value(world.player.max_hp)
         self.hp_bar.value = world.player.hp
+
+        # Updating boss bar
+        boss = None
+        for entity in world.entities:
+            if isinstance(entity, NextbotKingMunci):
+                boss = entity
+                break
+
+        if boss:
+            self.show_boss_hp = True
+            self.boss_hp_bar.set_max_value(boss.max_hp)
+            self.boss_hp_bar.value = boss.hp
+        else:
+            self.show_boss_hp = False
 
         # Move HP bar lower if debug info is displayed
         self.hp_bar.position.y = 175 if debug else 50
@@ -87,7 +108,11 @@ class HUD:
             return
 
         # Render the player's HP bar
-        RendererHpBar.render(screen, self.hp_bar)
+        RendererHpBar.render(screen, self.hp_bar, text=str(self.hp_bar.value))
+
+        # Render boss hp bar if needed
+        if self.show_boss_hp:
+            RendererHpBar.render(screen, self.boss_hp_bar, text="King Munci")
 
         # Render player's position text
         RendererText.render(screen, self.player_pos_text)
