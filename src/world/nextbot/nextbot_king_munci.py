@@ -92,7 +92,7 @@ class NextbotKingMunci(EntityNextbot, HasHealth):
             bullet_pos,
             direction,
             source=self,
-            damage=25
+            damage=15
         )
 
         self.world.add_entity(bullet)
