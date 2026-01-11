@@ -11,8 +11,10 @@ class Button:
         self.color = color
         self.hover_color = hover_color
         
-        self.text.center_in_hitbox(self.hitbox)
-
+        self.center_text()
+    def center_text(self):
+        if self.text:
+            self.text.center_in_hitbox(self.hitbox)
     @property
     def position(self):
         return self.hitbox.position
@@ -23,7 +25,7 @@ class Button:
 
     def set_position(self, position):
         self.position = position
-        self.text.center_in_hitbox(self.hitbox)
+        self.center_text()
 
     def is_mouse_in_button(self):
         if self.hitbox.collides_point(Position(*pygame.mouse.get_pos())):
