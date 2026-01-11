@@ -3,7 +3,8 @@ from .nextbot_asya import NextbotAsya
 from .nextbot_angry_munci import NextbotAngryMunci
 from assets import SoundStorage, AdvancedSound, Sprites, calculate_sound_volume
 from ..components import HasHealth
-from core import Timer, Position
+from ..other import EntityBullet
+from core import Timer, Position, Vec2
 import math
 import random
 
@@ -31,7 +32,8 @@ class NextbotKingMunci(EntityNextbot, HasHealth):
         self.can_damage_block = False
 
         self.summon_asya_timer = Timer(1.5)
-        self.summon_angry_timer = Timer(7.0)  # separate, slower timer for Angry Munci
+        self.summon_angry_timer = Timer(10.0)  # separate, slower timer for Angry Munci
+        self.shoot_timer = Timer(1.5)  # Bullet shooting timer
         self.is_enraged = False
         self.created_entities = []
 
@@ -40,6 +42,10 @@ class NextbotKingMunci(EntityNextbot, HasHealth):
 
     def update(self, delta):
         super().update(delta)
+        self.shoot_timer.update(delta)
+        if self.shoot_timer.finished:
+            self.shoot_player()
+            self.shoot_timer.reset()
 
         if not self.can_damage_block:
             self.block_break_timer.update(delta)
@@ -65,6 +71,31 @@ class NextbotKingMunci(EntityNextbot, HasHealth):
         self.summon_asya_timer.duration = 2.0
         self.speed += 500
         SoundStorage.KING_MUNCI_ROAR.play()
+
+    def shoot_player(self):
+        player_pos = self.world.player.position
+
+        dx = player_pos.x - self.position.x
+        dy = player_pos.y - self.position.y
+
+        angle = math.degrees(math.atan2(dy, dx))
+
+        direction = Vec2(angle)
+
+        bullet_pos = Position(
+            self.position.x + self.hitbox.width // 2,
+            self.position.y + self.hitbox.height // 2
+        )
+
+        bullet = EntityBullet(
+            self.world,
+            bullet_pos,
+            direction,
+            source=self,
+            damage=25
+        )
+
+        self.world.add_entity(bullet)
 
     def summon_asya(self):
         player_pos = self.world.player.position

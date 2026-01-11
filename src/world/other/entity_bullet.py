@@ -4,11 +4,12 @@ from core import Timer
 
 
 class EntityBullet(Entity):
-    def __init__(self, world, position, direction, creation_params = None, source=None):
+    def __init__(self, world, position, direction, creation_params = None, source=None, damage=9):
         super().__init__(world, position, 25, 25, creation_params)
         self.direction = direction
         self.source = source
         self.remove_timer = Timer(10)
+        self.damage = damage
 
     def update(self, delta):
         self.remove_timer.update(delta)
@@ -24,5 +25,5 @@ class EntityBullet(Entity):
     def onEntityCollision(self, entity):
         if isinstance(entity, HasHealth):
             if entity != self.source:
-                entity.damage(9)
+                entity.damage(self.damage)
                 self.destroy()
