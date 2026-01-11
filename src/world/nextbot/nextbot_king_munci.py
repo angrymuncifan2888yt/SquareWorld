@@ -1,7 +1,7 @@
 from .entity_nextbot import EntityNextbot
 from .nextbot_asya import NextbotAsya
 from .nextbot_angry_munci import NextbotAngryMunci
-from assets import SoundStorage, AdvancedSound, Sprites
+from assets import SoundStorage, AdvancedSound, Sprites, calculate_sound_volume
 from ..components import HasHealth
 from core import Timer, Position
 import math
@@ -35,6 +35,7 @@ class NextbotKingMunci(EntityNextbot, HasHealth):
         self.is_enraged = False
         self.created_entities = []
 
+        self.death_sound = AdvancedSound(SoundStorage.KING_MUNCI_DYING)
         SoundStorage.KING_MUNCI_ROAR.play()
 
     def update(self, delta):
@@ -123,5 +124,9 @@ class NextbotKingMunci(EntityNextbot, HasHealth):
         # Killing all summoned bots
         for entity in self.created_entities:
             entity.destroy()
-    
+        
+        # Playing death sound
+        sound_volume = calculate_sound_volume(self.position, self.world.player.position, 1500)
+        self.death_sound.play_once(sound_volume)
+
         self.destroy()

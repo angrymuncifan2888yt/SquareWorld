@@ -73,3 +73,4 @@ class SoundStorage:
         cls.ASYA_AMBIENCE = pygame.mixer.Sound("assets/sound/asya_ambience.mp3")
         cls.SUPER_MUNCI_AMBIENCE = pygame.mixer.Sound("assets/sound/super_munci_ambience.mp3")
         cls.KING_MUNCI_ROAR = pygame.mixer.Sound("assets/sound/king_munci_roar.mp3")
+        cls.KING_MUNCI_DYING = pygame.mixer.Sound("assets/sound/king_munci_dying.mp3")
