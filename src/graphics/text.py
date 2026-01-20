@@ -1,14 +1,29 @@
 from core import Position, Camera
+from .ui_object import UiObject
 import pygame
 
 
-class Text:
-    def __init__(self, text: str, position: Position,
-                 font: pygame.font.Font, color: tuple[int, int, int]=(255, 255, 255)):
+class Text(UiObject):
+    def __init__(
+        self,
+        text: str,
+        position: Position,
+        font: pygame.font.Font,
+        color: tuple[int, int, int] = (255, 255, 255)
+    ):
+        super().__init__(position)
+
         self.text = text
-        self.position = position
         self.font = font
         self.color = color
+
+    # ===== INPUT =====
+    def input(self, delta, pg_event):
+        pass
+
+    # ===== UPDATE =====
+    def update(self, delta, pg_event):
+        pass
 
     def center_by_x(self, screen_width: int):
         text_width = self.font.size(self.text)[0]
@@ -19,22 +34,19 @@ class Text:
         self.position.x = hitbox.position.x + (hitbox.width - w) / 2
         self.position.y = hitbox.position.y + (hitbox.height - h) / 2
 
+    # ===== RENDER =====
     def render(
         self,
         surface: pygame.Surface,
         camera: Camera | None = None
     ):
+        global_pos = self.get_global_position()
+        draw_pos = camera.get_screen_position(global_pos) if camera else global_pos
+
         text_surface = self.font.render(
             self.text,
             True,
             self.color
         )
 
-        if camera:
-            pos = camera.get_screen_position(self.position)
-            surface.blit(text_surface, (pos.x, pos.y))
-        else:
-            surface.blit(
-                text_surface,
-                (self.position.x, self.position.y)
-            )
+        surface.blit(text_surface, draw_pos.to_tuple())

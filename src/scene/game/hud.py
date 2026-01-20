@@ -1,10 +1,11 @@
 import pygame
 import sys
 from core import Position
-from graphics import HpBar, Text, TempText, Button
+from graphics import HpBar, Text, TempText
 from assets import Fonts
 from renderer.other import RendererTypingField
 from world.nextbot import NextbotKingMunci
+from world.block import GrassBlock
 from core import Timer
 import const
 from command import TypingField, execute_command
@@ -39,7 +40,7 @@ class HUD:
             "", Position(10, 690), Fonts.FONT_30, color=(200, 0, 0), timer=Timer(5)
         )
 
-        self.chosen_block = None  # Currently selected block
+        self.chosen_block = GrassBlock  # Currently selected block
 
         # King Munci hp bar
         self.boss_hp_bar = HpBar(Position(360, 50), 0, 600, 50, (140, 20, 50), (20, 15, 25), (160, 130, 40))

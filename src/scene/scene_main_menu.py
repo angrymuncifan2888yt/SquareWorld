@@ -1,6 +1,6 @@
 from .scene import Scene
 from .scene_list import SceneList
-from graphics import Text, Button, CheckBox
+from graphics import Text, Button, CheckBox, UiManager
 from assets import Fonts
 from core import Position
 import const
@@ -11,6 +11,8 @@ class SceneMainMenu(Scene):
     def __init__(self, scene_manager):
         # Initialize the main menu scene
         super().__init__(scene_manager, SceneList.MAIN_MENU)
+
+        self.ui = UiManager()
 
         # Title text at the top of the screen
         self.text_title = Text("SquareWorld", Position(0, 10), Fonts.FONT_100)
@@ -24,6 +26,10 @@ class SceneMainMenu(Scene):
         self.checkbox_music = CheckBox(Position(400, 250), self._music_checkbox_clicked)
         self.checkbox_music.is_on = True
         self.text_music = Text(f"Music: {self.checkbox_music.is_on}", Position(550, 275), Fonts.FONT_30)
+        self.ui.add_ui_object(self.text_title)
+        self.ui.add_ui_object(self.button_play)
+        self.ui.add_ui_object(self.checkbox_music)
+        self.ui.add_ui_object(self.text_music)
 
     def _music_checkbox_clicked(self):
         self.text_music.text = f"Music: {self.checkbox_music.is_on}"
@@ -38,9 +44,9 @@ class SceneMainMenu(Scene):
     def input(self, *args, **kwargs):
         # Handle user input events
         pg_event = kwargs["pg_event"]
+        delta = kwargs["delta"]
 
-        self.checkbox_music.update(pg_event)
-        self.button_play.update(pg_event)
+        self.ui.input(delta, pg_event)
 
         # Check if Enter key is pressed to start the game
         for event in pg_event:
@@ -48,9 +54,11 @@ class SceneMainMenu(Scene):
                 if event.key == pygame.K_RETURN:
                     self.scene_manager.set_scene(SceneList.GAME)
 
+    def logic(self, *args, **kwargs):
+        pg_event = kwargs["pg_event"]
+        delta = kwargs["delta"]
+        self.ui.update(delta, pg_event)
+     
     def draw(self, screen):
         # Draw the title and play button on the screen
-        self.text_title.render(screen)
-        self.text_music.render(screen)
-        self.button_play.render(screen)
-        self.checkbox_music.render(screen)
+        self.ui.render(screen)

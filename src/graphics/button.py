@@ -1,71 +1,73 @@
 from core import Hitbox, Position, Camera
 from .text import Text
+from .ui_object import UiObject
 import pygame
 
 
-class Button:
-    def __init__(self, text: Text, position: Position, on_clicked=None, size=(400, 100),
-                 color=(50, 50, 50), hover_color=(75, 75, 75)):
+class Button(UiObject):
+    def __init__(self, text: Text, position: Position, on_clicked=None,
+                 size=(400, 100), color=(50, 50, 50), hover_color=(75, 75, 75)):
+        super().__init__(position)
         self.text = text
-        self.hitbox = Hitbox(position, *size)
+        self.hitbox = Hitbox(self.get_global_position(), *size)
         self.color = color
         self.hover_color = hover_color
         self.on_clicked = on_clicked
-        
+        self._clicked = False
         self.center_text()
 
-    def update(self, pg_event):
-        if self.isClicked(pg_event):
+    # ===== INPUT =====
+    def input(self, delta, pg_event):
+        # обновляем hitbox перед проверкой мыши
+        self.hitbox.position = self.get_global_position()
+
+        if not self.is_mouse_in_button():
+            return
+
+        for event in pg_event:
+            if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
+                self._clicked = True
+
+    # ===== UPDATE =====
+    def update(self, delta, pg_event):
+        # hitbox тоже должен быть актуальным
+        self.hitbox.position = self.get_global_position()
+
+        if self._clicked:
+            self._clicked = False
             if callable(self.on_clicked):
                 self.on_clicked()
 
     def center_text(self):
         if self.text:
             self.text.center_in_hitbox(self.hitbox)
-    @property
-    def position(self):
-        return self.hitbox.position
 
-    @position.setter
-    def position(self, value):
-        self.hitbox.position = value
-
-    def set_position(self, position):
+    def set_position(self, position: Position):
         self.position = position
+        self.hitbox.position = self.get_global_position()
         self.center_text()
 
     def is_mouse_in_button(self):
-        if self.hitbox.collides_point(Position(*pygame.mouse.get_pos())):
-            return True
-
-        return False
-
-    def isClicked(self, pg_event):
-        if self.is_mouse_in_button():
-            for event in pg_event:
-                if event.type == pygame.MOUSEBUTTONDOWN:
-                    if event.button == 1:
-                        return True
-                return False
-        return False
+        mouse_pos = Position(*pygame.mouse.get_pos())
+        return self.hitbox.collides_point(mouse_pos)
 
     def center_by_x(self, screen_width: int):
         self.set_position(Position((screen_width - self.hitbox.width) / 2, self.position.y))
 
-    def render(
-        self,
-        screen: pygame.Surface,
-        camera: Camera | None = None
-    ):
-        button_pos = camera.get_screen_position(self.position) if camera else self.position
+    # ===== RENDER =====
+    def render(self, screen: pygame.Surface, camera: Camera | None = None):
+        global_pos = self.get_global_position()
+        draw_pos = camera.get_screen_position(global_pos) if camera else global_pos
+
+        # обновляем hitbox и текст
+        self.hitbox.position = global_pos
 
         surf = pygame.Surface((self.hitbox.width, self.hitbox.height))
-        if self.is_mouse_in_button():
-            surf.fill(self.hover_color)
-        else:
-            surf.fill(self.color)
+        surf.fill(self.hover_color if self.is_mouse_in_button() else self.color)
 
-        screen.blit(surf, button_pos.to_tuple())
+        screen.blit(surf, draw_pos.to_tuple())
 
         if isinstance(self.text, Text):
+            self.text.position = global_pos.copy()
+            self.text.center_in_hitbox(self.hitbox)
             self.text.render(screen, camera)
