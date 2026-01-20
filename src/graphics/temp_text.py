@@ -1,5 +1,4 @@
 from .text import Text
-from renderer.graphics import RendererText
 from core.timer import Timer
 import pygame
 
@@ -28,4 +27,4 @@ class TempText(Text):
     
     def render(self, surface, camera=None):
         if self.is_visible:
-            RendererText.render(surface, self, camera)
+            super().render(surface, camera)

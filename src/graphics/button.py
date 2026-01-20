@@ -1,4 +1,4 @@
-from core import Hitbox, Position
+from core import Hitbox, Position, Camera
 from .text import Text
 import pygame
 
@@ -51,3 +51,21 @@ class Button:
 
     def center_by_x(self, screen_width: int):
         self.set_position(Position((screen_width - self.hitbox.width) / 2, self.position.y))
+
+    def render(
+        self,
+        screen: pygame.Surface,
+        camera: Camera | None = None
+    ):
+        button_pos = camera.get_screen_position(self.position) if camera else self.position
+
+        surf = pygame.Surface((self.hitbox.width, self.hitbox.height))
+        if self.is_mouse_in_button():
+            surf.fill(self.hover_color)
+        else:
+            surf.fill(self.color)
+
+        screen.blit(surf, button_pos.to_tuple())
+
+        if isinstance(self.text, Text):
+            self.text.render(screen, camera)

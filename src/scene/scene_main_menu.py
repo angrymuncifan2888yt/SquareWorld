@@ -4,7 +4,6 @@ from graphics import Text, Button, CheckBox
 from assets import Fonts
 from core import Position
 import const
-from renderer.graphics import RendererText, RendererButton, RendererCheckBox
 import pygame
 
 
@@ -51,7 +50,7 @@ class SceneMainMenu(Scene):
 
     def draw(self, screen):
         # Draw the title and play button on the screen
-        RendererText.render(screen, self.text_title)
-        RendererText.render(screen, self.text_music)
-        RendererButton.render(screen, self.button_play)
-        RendererCheckBox.render(screen, self.checkbox_music)
+        self.text_title.render(screen)
+        self.text_music.render(screen)
+        self.button_play.render(screen)
+        self.checkbox_music.render(screen)

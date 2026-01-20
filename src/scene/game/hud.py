@@ -1,14 +1,13 @@
 import pygame
 import sys
 from core import Position
-from graphics import HpBar, Text, TempText
+from graphics import HpBar, Text, TempText, Button
 from assets import Fonts
-from renderer.graphics import RendererHpBar, RendererText
 from renderer.other import RendererTypingField
 from world.nextbot import NextbotKingMunci
 from core import Timer
 import const
-from command import TypingField, CommandParser, execute_command
+from command import TypingField, execute_command
 
 
 class HUD:
@@ -108,14 +107,14 @@ class HUD:
             return
 
         # Render the player's HP bar
-        RendererHpBar.render(screen, self.hp_bar, text=str(self.hp_bar.value))
+        self.hp_bar.render(screen, text=str(self.hp_bar.value))
 
         # Render boss hp bar if needed
         if self.show_boss_hp:
-            RendererHpBar.render(screen, self.boss_hp_bar, text="King Munci")
+            self.boss_hp_bar.render(screen, text="King Munci")
 
         # Render player's position text
-        RendererText.render(screen, self.player_pos_text)
+        self.player_pos_text.render(screen)
 
         # Render texture of the currently selected block
         screen.blit(self.chosen_block.texture(), (1090, 10))
@@ -133,6 +132,6 @@ class HUD:
             )
             self.fps_text.text = f"FPS: {round(clock.get_fps(), 3)}"
 
-            RendererText.render(screen, self.fps_text)
-            RendererText.render(screen, self.python_pygame_version_text)
-            RendererText.render(screen, self.camera_pos_text)
+            self.fps_text.render(screen)
+            self.python_pygame_version_text.render(screen)
+            self.camera_pos_text.render(screen)

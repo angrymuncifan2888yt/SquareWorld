@@ -1,5 +1,8 @@
-from core import Position, Hitbox
+from core import Position, Hitbox, Camera
 import const
+import pygame
+from .text import Text
+from assets import Fonts
 
 
 class HpBar:
@@ -25,3 +28,40 @@ class HpBar:
     @position.setter
     def position(self, value):
         self.hitbox.position = value
+
+    def render(
+        self,
+        screen: pygame.Surface,
+        camera: Camera = None,
+        text: str | None = None
+    ):
+        hp_bar_pos = camera.get_screen_position(self.position) if camera else self.position
+
+        pygame.draw.rect(
+            screen,
+            self.background_color,
+            (hp_bar_pos.x, hp_bar_pos.y, self.hitbox.width, self.hitbox.height)
+        )
+
+        fill_width = int(self.hitbox.width * (self.value / self.max_value))
+        pygame.draw.rect(
+            screen,
+            self.fill_color,
+            (hp_bar_pos.x, hp_bar_pos.y, fill_width, self.hitbox.height)
+        )
+
+        pygame.draw.rect(
+            screen,
+            self.border_color,
+            (hp_bar_pos.x, hp_bar_pos.y, self.hitbox.width, self.hitbox.height),
+            5
+        )
+
+        if text:
+            text_obj = Text(
+                text,
+                Position(0, 0),
+                Fonts.FONT_30
+            )
+            text_obj.center_in_hitbox(self.hitbox)
+            text_obj.render(screen)

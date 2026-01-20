@@ -102,12 +102,12 @@ def user_input(self, pg_event, delta):
                     self.world.stop_sound()
 
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_x, mouse_y = event.pos
+            world_x = mouse_x + self.camera.position.x
+            world_y = mouse_y + self.camera.position.y
+
             # Left click → place selected block
             if event.button == 1:
-                mouse_x, mouse_y = event.pos
-                world_x = mouse_x + self.camera.position.x
-                world_y = mouse_y + self.camera.position.y
-
                 self.world.add_entity(
                     self.blocks[self.current_block_index](
                         self.world,
@@ -117,10 +117,6 @@ def user_input(self, pg_event, delta):
 
             # Right click → damage or remove block under cursor
             elif event.button == 3:
-                mouse_x, mouse_y = event.pos
-                world_x = mouse_x + self.camera.position.x
-                world_y = mouse_y + self.camera.position.y
-
                 # Iterate through all blocks to find one under the cursor
                 for block in self.world.entities[:]:
                     if isinstance(block, EntityBlock):
@@ -128,12 +124,12 @@ def user_input(self, pg_event, delta):
                         by = block.position.y
 
                         if bx <= world_x <= bx + block.hitbox.width and by <= world_y <= by + block.hitbox.height:
-                            if self.world.player.god_mode:
-                                # Remove block instantly in god mode
-                                self.world.remove_entity(block)
-                                SoundStorage.BREAKING.play()
-                            else:
-                                # Damage block and play breaking sound
-                                block.damage(1)
-                                SoundStorage.BREAKING.play()
-                            break
+                                if self.world.player.god_mode:
+                                    # Remove block instantly in god mode
+                                    self.world.remove_entity(block)
+                                    SoundStorage.BREAKING.play()
+                                else:
+                                    # Damage block and play breaking sound
+                                    block.damage(1)
+                                    SoundStorage.BREAKING.play()
+                                break

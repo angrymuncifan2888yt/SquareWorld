@@ -1,5 +1,6 @@
 from .button import Button
 from core import Hitbox, Position
+import pygame
 
 
 class CheckBox:
@@ -27,3 +28,10 @@ class CheckBox:
 
     def center_by_x(self, screen_width: int):
         self.position = Position((screen_width - self.hitbox.width) / 2, self.position.y)
+
+    def render(self, screen: pygame.Surface, camera=None):
+        pos = camera.get_screen_position(self.position) if camera else self.position
+        surf = pygame.Surface((self.hitbox.width, self.hitbox.height))
+        color = (0, 255, 0) if self.is_on else (255, 0, 0)
+        surf.fill(color)
+        screen.blit(surf, pos.to_tuple())

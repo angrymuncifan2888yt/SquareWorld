@@ -1,4 +1,4 @@
-from core import Position
+from core import Position, Camera
 import pygame
 
 
@@ -18,3 +18,23 @@ class Text:
         w, h = self.font.size(self.text)
         self.position.x = hitbox.position.x + (hitbox.width - w) / 2
         self.position.y = hitbox.position.y + (hitbox.height - h) / 2
+
+    def render(
+        self,
+        surface: pygame.Surface,
+        camera: Camera | None = None
+    ):
+        text_surface = self.font.render(
+            self.text,
+            True,
+            self.color
+        )
+
+        if camera:
+            pos = camera.get_screen_position(self.position)
+            surface.blit(text_surface, (pos.x, pos.y))
+        else:
+            surface.blit(
+                text_surface,
+                (self.position.x, self.position.y)
+            )
