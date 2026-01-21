@@ -3,11 +3,8 @@ class Scene:
         self.id = id
         self.scene_manager = scene_manager
 
-    def input(self, *args, **kwargs):
+    def update(self, *args, **kwargs):
         pass
 
-    def logic(self, *args, **kwargs):
-        pass
-
-    def draw(self, screen):
+    def render(self, screen):
         pass

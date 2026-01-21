@@ -44,11 +44,10 @@ class SceneGame(Scene):
         self.current_block_index = 0
         self.clock = None
 
-    def input(self, *args, **kvargs):
+    def update(self, *args, **kvargs):
         # Handle user input events using the shared user_input function
         user_input(self, kvargs["pg_event"], kvargs["delta"])
 
-    def logic(self, *args, **kvargs):
         # Main logic update for the scene
         self.clock = kvargs["clock"]
 
@@ -73,7 +72,7 @@ class SceneGame(Scene):
                 self.blocks[self.current_block_index]
             )
 
-    def draw(self, screen, **kvargs):
+    def render(self, screen, **kvargs):
         # Render the game world
         RendererWorld.render(screen, self.world, self.camera, self.debug)
 

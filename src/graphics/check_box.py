@@ -30,10 +30,6 @@ class CheckBox(UiObject):
         if callable(self.on_clicked):
             self.on_clicked()
 
-    # ===== INPUT =====
-    def input(self, delta, pg_event):
-        self.button.input(delta, pg_event)
-
     # ===== UPDATE =====
     def update(self, delta, pg_event):
         self.button.update(delta, pg_event)
@@ -52,6 +48,3 @@ class CheckBox(UiObject):
         surf = pygame.Surface((self.hitbox.width, self.hitbox.height))
         surf.fill((0, 255, 0) if self.is_on else (255, 0, 0))
         screen.blit(surf, draw_pos.to_tuple())
-
-        print(self.button.position)
-        # self.button.render(screen, camera)

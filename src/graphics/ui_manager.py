@@ -14,10 +14,6 @@ class UiManager:
         if obj in self.ui_objects:
             self.ui_objects.remove(obj)
 
-    def input(self, delta, pygame_event):
-        for obj in self.ui_objects:
-            obj.input(delta, pygame_event)
-
     def update(self, delta_time: float, pygame_event):
         for obj in self.ui_objects:
             obj.update(delta_time, pygame_event)

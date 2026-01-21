@@ -18,9 +18,6 @@ class UiObject:
             pos.y += parent_pos.y
         return pos
 
-    def input(self, delta, pg_event):
-        pass
-
     def update(self, delta, pg_event):
         pass
 

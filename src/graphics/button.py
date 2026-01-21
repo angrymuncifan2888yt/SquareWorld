@@ -16,8 +16,8 @@ class Button(UiObject):
         self._clicked = False
         self.center_text()
 
-    # ===== INPUT =====
-    def input(self, delta, pg_event):
+    # ===== UPDATE =====
+    def update(self, delta, pg_event):
         # обновляем hitbox перед проверкой мыши
         self.hitbox.position = self.get_global_position()
 
@@ -28,8 +28,6 @@ class Button(UiObject):
             if event.type == pygame.MOUSEBUTTONDOWN and event.button == 1:
                 self._clicked = True
 
-    # ===== UPDATE =====
-    def update(self, delta, pg_event):
         # hitbox тоже должен быть актуальным
         self.hitbox.position = self.get_global_position()
 

@@ -36,10 +36,9 @@ class Game:
 
             delta = self.clock.tick(60) / 1000
             pg_event = pygame.event.get()
-
-            self.scene_manager.input_current_scene(delta=delta, pg_event=pg_event)
-            self.scene_manager.logic_current_scene(delta=delta, pg_event=pg_event, clock=self.clock)
-            self.scene_manager.draw_current_scene(self.screen)
+            
+            self.scene_manager.update_current_scene(delta=delta, pg_event=pg_event, clock=self.clock)
+            self.scene_manager.render_current_scene(self.screen)
     
             for event in pg_event:
                 if event.type == pygame.QUIT:

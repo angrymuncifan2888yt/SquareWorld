@@ -29,10 +29,6 @@ class HpBar(UiObject):
 
         self.show_text = False
 
-    # ===== INPUT =====
-    def input(self, delta, pg_event):
-        pass
-
     # ===== UPDATE =====
     def update(self, delta, pg_event):
         self.value = max(0, min(self.value, self.max_value))

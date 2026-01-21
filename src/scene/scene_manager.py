@@ -9,11 +9,8 @@ class SceneManager:
     def set_scene(self, id):
         self.current_scene = self.scenes[id]
 
-    def input_current_scene(self, *args, **kwargs):
-        self.current_scene.input(*args, **kwargs)
+    def update_current_scene(self, *args, **kwargs):
+        self.current_scene.update(*args, **kwargs)
 
-    def logic_current_scene(self, *args, **kwargs):
-        self.current_scene.logic(*args, **kwargs)
-
-    def draw_current_scene(self, screen, *args, **kvargs):
-        self.current_scene.draw(screen, *args, **kvargs)
+    def render_current_scene(self, screen, *args, **kvargs):
+        self.current_scene.render(screen, *args, **kvargs)

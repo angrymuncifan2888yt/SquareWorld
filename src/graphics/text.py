@@ -17,14 +17,6 @@ class Text(UiObject):
         self.font = font
         self.color = color
 
-    # ===== INPUT =====
-    def input(self, delta, pg_event):
-        pass
-
-    # ===== UPDATE =====
-    def update(self, delta, pg_event):
-        pass
-
     def center_by_x(self, screen_width: int):
         text_width = self.font.size(self.text)[0]
         self.position.x = (screen_width - text_width) / 2

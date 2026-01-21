@@ -41,12 +41,10 @@ class SceneMainMenu(Scene):
     def _button_play_clicked(self):
         self.scene_manager.set_scene(SceneList.GAME)
 
-    def input(self, *args, **kwargs):
+    def update(self, *args, **kwargs):
         # Handle user input events
         pg_event = kwargs["pg_event"]
         delta = kwargs["delta"]
-
-        self.ui.input(delta, pg_event)
 
         # Check if Enter key is pressed to start the game
         for event in pg_event:
@@ -54,11 +52,8 @@ class SceneMainMenu(Scene):
                 if event.key == pygame.K_RETURN:
                     self.scene_manager.set_scene(SceneList.GAME)
 
-    def logic(self, *args, **kwargs):
-        pg_event = kwargs["pg_event"]
-        delta = kwargs["delta"]
         self.ui.update(delta, pg_event)
      
-    def draw(self, screen):
+    def render(self, screen):
         # Draw the title and play button on the screen
         self.ui.render(screen)

@@ -1,7 +1,7 @@
 import pygame
 import sys
 from core import Position
-from graphics import HpBar, Text, TempText
+from graphics import HpBar, Text, TempText, Button
 from assets import Fonts
 from renderer.other import RendererTypingField
 from world.nextbot import NextbotKingMunci
