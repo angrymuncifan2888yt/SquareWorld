@@ -96,7 +96,7 @@ def command_god(world: "World", parsed_command: ParsedCommand):
 def command_max_health(world: "World", parsed_command: ParsedCommand):
     # Set player's maximum HP
     hp = int(parsed_command.args[0])
-    world.player.hp.set_max_hp(hp)
+    world.player.set_max_hp(hp)
     return f"Set max health to {hp}"
 
 
