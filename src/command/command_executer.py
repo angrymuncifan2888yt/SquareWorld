@@ -1,5 +1,5 @@
 from .commands import *
-from .command_parser import CommandParser
+from .command_parser import parse_command
 
 
 COMMANDS = {
@@ -16,7 +16,7 @@ COMMANDS = {
 }
 def execute_command(game_world, command: str):
     try:
-        parsed_command = CommandParser.parse(command)
+        parsed_command = parse_command(command)
         return COMMANDS[parsed_command.name](game_world, parsed_command)
     except Exception as error:
         return error
