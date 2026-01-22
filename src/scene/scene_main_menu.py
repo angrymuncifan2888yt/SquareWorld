@@ -1,6 +1,6 @@
 from .scene import Scene
 from .scene_list import SceneList
-from graphics import Text, Button, CheckBox, UiManager
+from graphics import Text, NormalButton, CheckBox, UiManager
 from assets import Fonts
 from core import Position
 import const
@@ -19,7 +19,7 @@ class SceneMainMenu(Scene):
         self.text_title.center_by_x(const.WINDOW_SIZE[0])
 
         # Play button in the center
-        self.button_play = Button(Text("Press enter to play", Position(0, 0), Fonts.FONT_30), Position(100, 120), self._button_play_clicked)
+        self.button_play = NormalButton(Text("Press enter to play", Position(0, 0), Fonts.FONT_30), Position(100, 120), self._button_play_clicked)
         self.button_play.center_by_x(const.WINDOW_SIZE[0])
 
         # Music checkbox
